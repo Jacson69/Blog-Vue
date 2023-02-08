@@ -1,11 +1,11 @@
 <script setup>
-import {mavonEditor,writeModal} from 'mavon-editor'
+import { mavonEditor, writeModal } from 'mavon-editor';
 // import 'mavon-editor/dist/css/index.css'
 </script>
 <template>
-    <div>
-      <p>Tip：每5分钟会自动保存噢</p>
-      <!-- <mavon-editor
+  <div>
+    <p>Tip：每5分钟会自动保存噢</p>
+    <!-- <mavon-editor
       :value="input"
       :subfield = "false"
       :defaultOpen = "'preview'"
@@ -14,5 +14,5 @@ import {mavonEditor,writeModal} from 'mavon-editor'
       :transition="false"
       />
       <write-modal></write-modal> -->
-    </div>
+  </div>
 </template>

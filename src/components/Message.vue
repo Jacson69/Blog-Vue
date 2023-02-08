@@ -1,9 +1,12 @@
-<script setup>
-import {  useMessage } from 'naive-ui';
+<script lang="jsx">
+import { useMessage } from 'naive-ui';
+import { defineComponent } from 'vue';
 
-
-const message = useMessage();
-window.msg = message
-
-
+export default defineComponent({
+  setup() {
+    const message = useMessage();
+    window.msg = message;
+    return () => undefined;
+  },
+});
 </script>

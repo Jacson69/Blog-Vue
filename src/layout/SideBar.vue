@@ -5,9 +5,9 @@ import SvgIcon from '@/components/SvgIcon.vue';
 // import {Menu, MenuItem, LayoutSider} from 'ant-design-vue'
 </script>
 
-<template> 
-<div class="side-bar">
-  <div class="title">Blog Web</div>
+<template>
+  <div class="side-bar">
+    <div class="title">Blog Web</div>
     <RouterLink
       v-for="item of menu"
       :to="{ name: item.name }"
@@ -15,9 +15,9 @@ import SvgIcon from '@/components/SvgIcon.vue';
       activeClass="active"
       :key="item.name"
     >
-    <div class="icon-wrap">
-      <SvgIcon :name="item.meta.icon"/>
-    </div>
+      <div class="icon-wrap">
+        <SvgIcon :name="item.meta.icon" />
+      </div>
       {{ item.meta.label }}
     </RouterLink>
   </div>
@@ -32,7 +32,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
   background-color: transparent;
   user-select: none;
   padding: 16px;
-  padding-top:50px ;
+  padding-top: 50px;
   background-color: transparent;
   .title {
     padding-left: 50px;
@@ -52,7 +52,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
     color: rgb(51, 46, 46);
     text-decoration: none;
     border-radius: 6px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     &.active {
       background-color: bisque;
       color: #000;

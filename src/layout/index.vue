@@ -2,7 +2,7 @@
 import { watchEffect } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import SideBar from './SideBar.vue';
-import Header from './Header.vue'
+import Header from './Header.vue';
 const route = useRoute();
 
 watchEffect(() => {

@@ -8,9 +8,9 @@ const axiosInst = axios.create({
 axiosInst.interceptors.request.use(
   (config) => {
     Object.assign(config.headers, {
-      Authorization: 'Bearer ' + localStorage.getItem("TOKEN")
-  })
-    
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('TOKEN')).token}`,
+    });
+
     console.log(config);
     return config;
   },
@@ -19,13 +19,12 @@ axiosInst.interceptors.request.use(
 
 axiosInst.interceptors.response.use(
   (response) => {
-    const {code,data,msg} = response.data
+    const { code, data, msg } = response.data;
     if (code === 200) {
-      return data
-    }
-    else {
-      window.msg.error(msg)
-      throw new Error(msg)
+      return data;
+    } else {
+      window.msg.error(msg);
+      throw new Error(msg);
     }
   },
   (error) => Promise.reject(error)

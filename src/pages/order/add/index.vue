@@ -1,3 +1,3 @@
 <template>
-    <div>另一个页面</div>
+  <div>另一个页面</div>
 </template>

@@ -1,14 +1,15 @@
-import requests from "@/utils/request";
+import request from '@/utils/request';
 
-
-export const reqLogin = (data) => requests({
+export const reqLogin = (data) =>
+  request({
     url: '/auth/login',
     method: 'post',
-    data: data,
-})
+    data,
+  });
 
-export const reqRegister = (data) => requests({
+export const reqRegister = (data) =>
+  request({
     url: '/auth/register',
     method: 'post',
-    data: data,
-})
+    data,
+  });

@@ -1,7 +1,7 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import { NConfigProvider,NMessageProvider } from 'naive-ui'
-import Message  from '@/components/Message.vue'
+import { RouterView } from 'vue-router';
+import { NConfigProvider, NMessageProvider } from 'naive-ui';
+import Message from '@/components/Message.vue';
 const themeOverrides = {
   Button: {
     colorPrimary: '#336699',
@@ -16,8 +16,8 @@ const themeOverrides = {
 <template>
   <NConfigProvider :theme-overrides="themeOverrides">
     <NMessageProvider>
-      <Message></Message>
-        <RouterView />
+      <Message />
+      <RouterView />
     </NMessageProvider>
   </NConfigProvider>
 </template>
