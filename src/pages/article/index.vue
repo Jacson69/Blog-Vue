@@ -5,9 +5,14 @@ import {mavonEditor,writeModal} from 'mavon-editor'
 <template>
     <div>
       <p>Tip：每5分钟会自动保存噢</p>
-      <mavon-editor
-      v-model="value"
+      <!-- <mavon-editor
+      :value="input"
+      :subfield = "false"
+      :defaultOpen = "'preview'"
+      :toolbarsFlag = "false"
+      :boxShadow="false"
+      :transition="false"
       />
-      <write-modal></write-modal>
+      <write-modal></write-modal> -->
     </div>
 </template>

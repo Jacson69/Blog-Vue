@@ -1,9 +1,9 @@
 <script setup>
 import {mavonEditor,writeModal} from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
+// import 'mavon-editor/dist/css/index.css'
 </script>
 <template>
-    <div id="main">
+    <div>
       <p>Tip：每5分钟会自动保存噢</p>
       <mavon-editor
         :subfield="false"
