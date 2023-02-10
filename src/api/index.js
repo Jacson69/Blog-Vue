@@ -17,12 +17,12 @@ export function reqCategoryList() {
 //     data: data,
 // })
 
-export const reqGetArticlesByPage = (data) =>
-  requests({
-    url: '/auth/getArticlesByPage',
-    method: 'post',
-    data,
-  });
+// export const reqGetArticlesByPage = (data) =>
+//   requests({
+//     url: '/auth/getArticlesByPage',
+//     method: 'post',
+//     data,
+//   });
 
 export const reqGetArticlesInfo = () =>
   requests({

@@ -33,7 +33,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
   user-select: none;
   padding: 16px;
   padding-top: 50px;
-  background-color: transparent;
+
   .title {
     padding-left: 50px;
     padding-bottom: 50px;

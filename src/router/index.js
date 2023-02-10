@@ -24,9 +24,9 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   // ...
   const token = useUserStore().token;
-  console.log(token);
-  console.log(to);
-  console.log(from);
+  // console.log(token);
+  // console.log(to);
+  // console.log(from);
   if (!token && to.name !== 'LOGIN') {
     return { name: 'LOGIN' };
   } else if (token && to.name === 'LOGIN') {

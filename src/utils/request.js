@@ -11,7 +11,7 @@ axiosInst.interceptors.request.use(
       Authorization: `Bearer ${JSON.parse(localStorage.getItem('TOKEN')).token}`,
     });
 
-    console.log(config);
+    // console.log(config);
     return config;
   },
   (error) => Promise.reject(error)

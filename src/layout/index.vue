@@ -22,14 +22,15 @@ watchEffect(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .layout {
   display: flex;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
   .main-container {
     flex-grow: 1;
+    width: auto;
   }
 }
 </style>

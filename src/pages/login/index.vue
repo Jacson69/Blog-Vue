@@ -52,7 +52,6 @@ const handleRegiter = async () => {
   }
 };
 const handlerenter = (key) => {
-  console.log('sadasdsadsadqwqeqwe');
   if (key === 0) {
     handleRegiter();
   } else {

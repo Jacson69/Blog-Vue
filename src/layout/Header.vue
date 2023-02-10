@@ -1,10 +1,20 @@
 <script setup>
 import SvgIcon from '@/components/SvgIcon.vue';
+import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
+// import { MdCash } from '@vicons/ionicons4';
 </script>
 <template>
   <div class="header">
     <div class="left">
-      <div class="top">Pages / Dashboard</div>
+      <!-- <div class="top">Pages / Dashboard</div>
+      <div class="bottom">Dashboard</div> -->
+      <div class="top">
+        <n-breadcrumb separator=">">
+          <n-breadcrumb-item> Pages</n-breadcrumb-item>
+          <n-breadcrumb-item> 天津分行</n-breadcrumb-item>
+        </n-breadcrumb>
+      </div>
+
       <div class="bottom">Dashboard</div>
     </div>
     <div class="right">
@@ -21,9 +31,9 @@ import SvgIcon from '@/components/SvgIcon.vue';
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
-  background-color: #d19393;
+  background-color: #f9efef;
   display: flex;
   border-radius: 8px;
   justify-content: space-between;
@@ -48,6 +58,8 @@ import SvgIcon from '@/components/SvgIcon.vue';
     padding-right: 50px;
     font-size: 20px;
     .user {
+      display: flex;
+      align-items: center;
       cursor: pointer;
       padding-right: 15px;
     }
