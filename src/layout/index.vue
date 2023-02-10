@@ -31,6 +31,7 @@ watchEffect(() => {
   .main-container {
     flex-grow: 1;
     width: auto;
+    padding: 0 40px;
   }
 }
 </style>

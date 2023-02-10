@@ -32,11 +32,15 @@ async function getArticles(obj) {
 }
 </script>
 <template>
-  <div class="content">
-    <div class="top"><Memories :list="diariesList" /></div>
-    <div class="right"><Team :list="menberList" /></div>
-    <div class="left"><TeamArticle :list="articleList" /></div>
-    <div class="bottom"><Resource /></div>
+  <div>
+    <div class="content">
+      <div class="top"><Memories :list="diariesList" /></div>
+      <div class="right"><Team :list="menberList" /></div>
+    </div>
+    <div>
+      <div class="left"><TeamArticle :list="articleList" /></div>
+      <div class="bottom"><Resource /></div>
+    </div>
   </div>
 
   <!-- <div>
@@ -47,7 +51,7 @@ async function getArticles(obj) {
 <style lang="scss" scoped>
 .content {
   display: flex;
-  margin: 16px;
+  margin: 16px 0;
   min-width: 900px;
   overflow: auto;
 }

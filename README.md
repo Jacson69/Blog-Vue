@@ -7,9 +7,11 @@ This template should help get you started developing with Vue 3 in Vite.
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 ## Customize configurationd
-npm i eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue prettier
+
 See [Vite Configuration Reference](https://vitejs.dev/config/).
+npm i eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue prettier
 npm i lodash
+:src="item.avatar"
 ## Project Setup
 
 ```sh

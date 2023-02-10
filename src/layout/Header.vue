@@ -37,7 +37,7 @@ import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
   display: flex;
   border-radius: 8px;
   justify-content: space-between;
-  margin: 16px;
+  margin: 16px 0;
   height: auto;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
   .left {
