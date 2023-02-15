@@ -28,7 +28,7 @@ const props = defineProps({
             </template>
             <template #description>
               <NSpace size="small" style="margin-top: 4px">
-                <NTag :bordered="false" type="info" size="small"> 环形公路 </NTag>
+                <NTag :bordered="false" type="success" size="small"> 环形公路 </NTag>
                 <NTag :bordered="false" type="info" size="small"> 潜水艇司机 </NTag>
               </NSpace>
             </template>

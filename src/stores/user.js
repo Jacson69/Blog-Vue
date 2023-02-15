@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import { reqLogin } from '@/api/user';
-import { reqRegister } from '@/api';
+import { reqLogin, reqRegister } from '@/api/user';
+// import { reqRegister } from '@/api';
 
 export const useUserStore = defineStore('user', {
   state: () => ({ token: JSON.parse(localStorage.getItem('TOKEN') || '{"token":""}').token }),

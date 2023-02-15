@@ -23,13 +23,13 @@ async function getArticle(PageSize, PageNo) {
   articleList.articles = [];
   articleList.count = result.count;
   articleList.user = result.user;
-  for (const value of result.articles) {
+  for (const value of result.records) {
     map[value.Title] = value;
   }
-  for (const value of result.records) {
+  for (const value of result.articles) {
     articleList.articles.push({ ...map[value.Title], ...value });
   }
-  // console.log(articleList);
+  console.log(articleList);
 }
 
 const articleHotList = ref([]);

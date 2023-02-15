@@ -9,6 +9,8 @@ const themeOverrides = {
     colorFocusPrimary: '#336699',
     colorPressedPrimary: '#336699',
     borderPrimary: '1px solid #336699',
+    // textColorWarning: 'black',
+    // colorWarning: 'white',
   },
 };
 </script>
