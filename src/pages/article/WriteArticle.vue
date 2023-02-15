@@ -1,6 +1,5 @@
 <script setup>
-import { async } from '@kangc/v-md-editor';
-import { NButton, NCard, NForm, NFormItem, NFormItemGi, NInput, NModal, NSwitch } from 'naive-ui';
+import { NButton, NCard, NForm, NFormItem, NInput, NModal, NSwitch } from 'naive-ui';
 import { reactive } from 'vue';
 
 const props = defineProps({

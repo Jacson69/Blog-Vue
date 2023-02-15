@@ -78,25 +78,25 @@ export const reqCreateTeam = (data) =>
     data,
   });
 
-export const reqEditUserInfo = (data) =>
-  requests({
-    url: '/auth/editUserInfo',
-    method: 'post',
-    data,
-  });
+// export const reqEditUserInfo = (data) =>
+//   requests({
+//     url: '/auth/editUserInfo',
+//     method: 'post',
+//     data,
+//   });
 
-export const reqInfo = () =>
-  requests({
-    url: '/auth/info',
-    method: 'get',
-  });
+// export const reqInfo = () =>
+//   requests({
+//     url: '/auth/info',
+//     method: 'get',
+//   });
 
-export const reqSaveArticle = (data) =>
-  requests({
-    url: '/auth/saveArticle',
-    method: 'post',
-    data,
-  });
+// export const reqSaveArticle = (data) =>
+//   requests({
+//     url: '/auth/saveArticle',
+//     method: 'post',
+//     data,
+//   });
 
 export const reqSavaResource = (data) =>
   requests({
