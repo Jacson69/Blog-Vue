@@ -12,3 +12,14 @@ export const reqEditUserInfo = (data) =>
     method: 'post',
     data,
   });
+
+export const reqGetArticlesByUser = (data) => {
+  const param = new URLSearchParams();
+  param.append('PageSize', data.PageSize);
+  param.append('PageNo', data.PageNo);
+  return request({
+    url: '/auth/getArticlesByUser',
+    method: 'post',
+    data: param,
+  });
+};

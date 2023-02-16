@@ -11,7 +11,7 @@ const props = defineProps({
 <template>
   <NCard title="文章" class="article">
     <NList hoverable clickable>
-      <!-- <NListItem v-for="item of props.list.articles" :item="item" :key="item.id">
+      <NListItem v-for="item of props.list.articles" :item="item" :key="item.id">
         <div>
           <NThing title="相见恨晚" content-style="margin-top: 10px;">
             <template #avatar>
@@ -36,7 +36,7 @@ const props = defineProps({
         </div>
         {{ item.CreatedAt }} <br />
         {{ item.Description }}
-      </NListItem> -->
+      </NListItem>
     </NList>
   </NCard>
 </template>

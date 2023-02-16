@@ -1,16 +1,26 @@
 <script setup>
 import Profile from './Profile.vue';
 import Article from './Article.vue';
-import { reqEditUserInfo, reqInfo } from '@/api/profile';
+import { reqEditUserInfo, reqGetArticlesByUser, reqInfo } from '@/api/profile';
 import { reactive, ref } from 'vue';
+
+const articleList = reactive({ count: 0, articles: [] });
+
+getArticleByUser(10, 0);
+
+async function getArticleByUser(PageSize, PageNo) {
+  // console.log(PageNo);
+  // console.log(PageSize);
+  const result = await reqGetArticlesByUser({ PageSize, PageNo });
+  articleList.articles = result.articles;
+  articleList.count = result.count;
+}
 
 const userInfo = ref({});
 getUser();
 async function getUser() {
   const result = await reqInfo();
-  userInfo.value = result.users;
-  console.log(userInfo);
-  console.log('------------');
+  userInfo.value = result.user;
 }
 </script>
 <template>
