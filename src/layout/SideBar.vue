@@ -23,7 +23,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .side-bar {
   display: flex;
   width: 248px;

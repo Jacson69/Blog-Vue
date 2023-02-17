@@ -3,13 +3,14 @@ import {
   NAvatar,
   NButton,
   NCard,
-  NDataTable,
   NDescriptions,
   NDescriptionsItem,
-  NList,
-  NListItem,
+  NForm,
+  NFormItem,
+  NInput,
+  NRadio,
+  NRadioGroup,
   NSpace,
-  NTag,
   NThing,
 } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
@@ -21,9 +22,15 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['aaa']);
+
 const isEdit = ref(false);
 const editClick = () => {
   isEdit.value = true;
+};
+
+const handlerCancel = () => {
+  isEdit.value = false;
 };
 </script>
 
@@ -71,7 +78,7 @@ const editClick = () => {
       <div>
         <div class="personInfo">
           <h3>个人信息</h3>
-          <NButton @click="editClick" v-show="!isEdit">xxx</NButton>
+          <NButton @click="editClick">xxx</NButton>
         </div>
         <div v-show="!isEdit">
           <p class="introduce">
@@ -105,6 +112,54 @@ const editClick = () => {
             </n-descriptions-item>
           </n-descriptions>
         </div>
+
+        <!-- 编辑状态 -->
+        <div v-show="isEdit">
+          <n-form
+            ref="formRef"
+            :model="model"
+            :rules="rules"
+            label-placement="left"
+            label-width="auto"
+            require-mark-placement="right-hanging"
+            :size="size"
+            :style="{
+              maxWidth: '640px',
+            }"
+          >
+            <n-form-item label="昵称：" path="inputValue">
+              <n-input :value="props.userInfo.name" @input="(value) => emit('aaa', value)" />
+            </n-form-item>
+
+            <n-form-item label="性别：" path="radioGroupValue">
+              <n-radio-group name="radiogroup1" :value="props.userInfo.sex">
+                <n-space>
+                  <n-radio value="male"> 男 </n-radio>
+                  <n-radio value="female"> 女 </n-radio>
+                </n-space>
+              </n-radio-group>
+            </n-form-item>
+            <n-form-item label="电话：">
+              <span>{{ props.userInfo.telephone }}</span>
+            </n-form-item>
+            <n-form-item label="邮箱：">
+              <span>{{ props.userInfo.email }}</span>
+            </n-form-item>
+            <n-form-item label="所属团队：">
+              <span>{{ props.userInfo.team }}</span>
+            </n-form-item>
+            <n-form-item label="创建时间：">
+              <span>{{ props.userInfo.created_at }}</span>
+            </n-form-item>
+            <n-form-item label="个性签名：" path="inputValue">
+              <n-input :value="props.userInfo.introduction" />
+            </n-form-item>
+            <div class="footer">
+              <NButton type="info" @click="handlerOk">确定</NButton>
+              <NButton type="error" @click="handlerCancel">取消</NButton>
+            </div>
+          </n-form>
+        </div>
       </div>
     </div>
 
@@ -133,6 +188,7 @@ const editClick = () => {
   text-align: center;
   padding-top: 20px;
 }
+
 .content {
   margin-top: 20px;
   .personInfo {
@@ -150,5 +206,10 @@ const editClick = () => {
     justify-content: space-between;
     background-color: red;
   }
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 }
 </style>

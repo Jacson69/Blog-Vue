@@ -50,7 +50,7 @@ console.log(props.list.articles);
     </NList>
   </NCard>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .article {
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);

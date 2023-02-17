@@ -6,12 +6,22 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(['view']);
+const handlerPreview = (id) => {
+  // console.log(id);
+  emit('view', 1);
+};
 </script>
 
 <template>
   <NCard title="文章" class="article">
     <NList hoverable clickable>
-      <NListItem v-for="item of props.list.articles" :item="item" :key="item.id">
+      <NListItem
+        v-for="item of props.list.articles"
+        :item="item"
+        :key="item.id"
+        @click="handlerPreview(item.id)"
+      >
         <div>
           <NThing title="相见恨晚" content-style="margin-top: 10px;">
             <template #avatar>
@@ -40,7 +50,7 @@ const props = defineProps({
     </NList>
   </NCard>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .article {
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
