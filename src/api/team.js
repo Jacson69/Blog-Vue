@@ -20,3 +20,10 @@ export const reqGetArticlesByTeam = (data) =>
     method: 'post',
     data,
   });
+
+export const reqAddTeamDiary = (data) =>
+  request({
+    url: '/auth/addTeamDiary',
+    method: 'post',
+    data,
+  });

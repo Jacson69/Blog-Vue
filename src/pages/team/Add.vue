@@ -1,25 +1,48 @@
 <script setup>
-import { NButton, NCard, NForm, NFormItem, NInput, NModal, NSwitch } from 'naive-ui';
-import { reactive } from 'vue';
-
+import {
+  NButton,
+  NCard,
+  NForm,
+  NFormItem,
+  NInput,
+  NModal,
+  NRadio,
+  NRadioGroup,
+  NSpace,
+} from 'naive-ui';
+import { reactive, ref } from 'vue';
+import { reqAddTeamDiary } from '@/api/team';
 const props = defineProps({
   wModal: {
     type: Boolean,
     required: true,
   },
 });
-const emit = defineEmits(['close', 'ok']);
-const data = reactive({ title: '', description: '', status: false });
+const emit = defineEmits(['close']);
+const data = reactive({ context: '', level: true });
+const level = ref('1');
 const handlerCancel = () => {
-  data.title = '';
-  data.description = '';
-  data.status = false;
+  data.context = '';
+  level.value = '1';
+  data.level = true;
   emit('close');
 };
 
 // const articleData = reactive({})
-const handlerOk = () => {
-  emit('ok', data);
+const handlerOk = async () => {
+  if (data.context === '') {
+    window.msg.warning('保存失败！');
+    return;
+  }
+  // data.level = level == "1" ? true : false,
+  if (level.value === '1') {
+    data.level = true;
+  } else {
+    data.level = false;
+  }
+  const result = await reqAddTeamDiary(data);
+  console.log(result);
+  window.msg.success('保存成功！');
   handlerCancel();
 };
 </script>
@@ -28,7 +51,7 @@ const handlerOk = () => {
   <n-modal
     :show="props.wModal"
     preset="card"
-    title="保存文章"
+    title="添加备忘录"
     style="width: 500px"
     @mask-click="handlerCancel"
     @close="handlerCancel"
@@ -36,23 +59,24 @@ const handlerOk = () => {
     <NCard :bordered="false">
       <n-form label-placement="left" label-width="auto" require-mark-placement="right-hanging">
         <div class="card">
-          <n-form-item label="标题：" required>
-            <n-input placeholder="输入标题" v-model:value="data.title" />
-          </n-form-item>
-
-          <n-form-item label="摘要：">
+          <n-form-item label="内容：">
             <n-input
-              placeholder="建议填写！！！若无填写摘要，则默认显示文章标题。"
+              placeholder="请描述团队"
               type="textarea"
               :autosize="{
                 minRows: 3,
                 maxRows: 5,
               }"
-              v-model:value="data.description"
+              v-model:value="data.context"
             />
           </n-form-item>
-          <n-form-item label="是否公开：">
-            <n-switch v-model:value="data.status" />
+          <n-form-item label="级别：">
+            <n-radio-group v-model:value="level">
+              <n-space>
+                <n-radio value="1" checked> 紧急 </n-radio>
+                <n-radio value="0 "> 一般</n-radio>
+              </n-space>
+            </n-radio-group>
           </n-form-item>
         </div>
         <div class="footer">

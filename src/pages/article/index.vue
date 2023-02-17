@@ -50,7 +50,7 @@ const handlerOk = async (obj) => {
   }
   const result = await reqSaveArticle(data);
   data.context = '';
-  console.log(result);
+  // console.log(result);
   window.msg.success('保存成功！');
 };
 </script>

@@ -3,6 +3,7 @@ import Memories from './Memories.vue';
 import Team from './Team.vue';
 import TeamArticle from './TeamArticle.vue';
 import Resource from './Resource.vue';
+import AddModal from './Add.vue';
 import { reqGetArticlesByTeam, reqGetDiariesByTeamName, reqGetMembersByTeamName } from '@/api/team';
 import { reactive, ref } from 'vue';
 
@@ -30,17 +31,42 @@ async function getArticles(obj) {
   articleList.count = result.count;
   // console.log(articleList.value);
 }
+
+const showModal = ref(false);
+function add() {
+  showModal.value = true;
+  console.log(showModal.value);
+}
+
+const handlerCancel = () => {
+  showModal.value = false;
+};
+// const data = reactive({ title: '', description: '', context: '', status: false });
+// const handlerOk = async (obj) => {
+//   if (data.context === '') {
+//     window.msg.warning('保存失败！');
+//     return;
+//   }
+//   for (const key in obj) {
+//     data[key] = obj[key];
+//   }
+//   const result = await reqSaveArticle(data);
+//   data.context = '';
+//   console.log(result);
+//   window.msg.success('保存成功！');
+// };
 </script>
 <template>
   <div>
     <div class="content">
-      <div class="top"><Memories :list="diariesList" /></div>
+      <div class="top"><Memories :list="diariesList" @addMemory="add" /></div>
       <div class="right"><Team :list="menberList" /></div>
     </div>
     <div>
       <div class="left"><TeamArticle :list="articleList" /></div>
       <div class="bottom"><Resource /></div>
     </div>
+    <AddModal :wModal="showModal" @close="handlerCancel" />
   </div>
 
   <!-- <div>

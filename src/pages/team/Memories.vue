@@ -8,6 +8,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(['addMemory']);
 </script>
 
 <template>
@@ -24,7 +26,7 @@ const props = defineProps({
   >
     <div class="header">
       <h2>团队备忘录</h2>
-      <SvgIcon name="add" class="add" />
+      <SvgIcon name="add" class="add" @click="() => emit('addMemory')" />
     </div>
 
     <div class="title">

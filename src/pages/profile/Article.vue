@@ -8,8 +8,8 @@ const props = defineProps({
 });
 const emit = defineEmits(['view']);
 const handlerPreview = (id) => {
-  // console.log(id);
-  emit('view', 1);
+  console.log(id);
+  emit('view', id);
 };
 </script>
 
@@ -19,8 +19,8 @@ const handlerPreview = (id) => {
       <NListItem
         v-for="item of props.list.articles"
         :item="item"
-        :key="item.id"
-        @click="handlerPreview(item.id)"
+        :key="item.ID"
+        @click="handlerPreview(item.ID)"
       >
         <div>
           <NThing title="相见恨晚" content-style="margin-top: 10px;">
