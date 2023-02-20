@@ -15,7 +15,7 @@ import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
         </n-breadcrumb>
       </div>
 
-      <div class="bottom">Dashboard</div>
+      <!-- <div class="bottom">Dashboard</div> -->
     </div>
     <div class="right">
       <!-- <div class="icon-wrap"> -->

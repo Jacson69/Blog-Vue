@@ -1,6 +1,7 @@
 <script setup>
-import { NCard, NDataTable, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
+import { NCard, NList, NListItem, NPagination, NSpace, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   list: {
@@ -8,8 +9,13 @@ const props = defineProps({
     required: true,
   },
 });
-
-const emit = defineEmits(['addMemory']);
+const page = ref(0);
+const emit = defineEmits(['addMemory', 'page']);
+const clickPage = (page) => {
+  // console.log(page);
+  emit('page', page - 1);
+};
+clickPage(page);
 </script>
 
 <template>
@@ -25,7 +31,7 @@ const emit = defineEmits(['addMemory']);
     class="hot"
   >
     <div class="header">
-      <h2>团队备忘录</h2>
+      <h2>团队留言</h2>
       <SvgIcon name="add" class="add" @click="() => emit('addMemory')" />
     </div>
 
@@ -36,8 +42,8 @@ const emit = defineEmits(['addMemory']);
       <div>时间</div>
     </div>
 
-    <NList hoverable clickable>
-      <NListItem v-for="item of props.list" :key="item.ID">
+    <NList hoverable clickable class="list">
+      <NListItem v-for="item of props.list.diaries" :key="item.ID">
         <div class="item">
           <div>{{ item.Name }}</div>
           <div>{{ item.Context }}</div>
@@ -50,16 +56,35 @@ const emit = defineEmits(['addMemory']);
         </div>
       </NListItem>
     </NList>
+    <div class="pagination">
+      <n-pagination
+        v-model:page="page"
+        :page-slot="3"
+        :item-count="props.list.count"
+        @click="clickPage(page)"
+        :page-size="5"
+      />
+    </div>
   </NCard>
 </template>
 <style lang="scss" scoped>
 .hot {
   // height: auto;
-  box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
+  border-radius: 8px;
+  // margin-left: 10px;
+  box-shadow: 0px 5px 8px rgb(0 0 0 / 15%);
+  .list {
+    min-height: 233px;
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
   .header {
     display: flex;
     align-items: center;
-    padding-top: 10px;
+    // padding-top: 10px;
 
     .add {
       padding-left: 16px;

@@ -7,11 +7,16 @@ import AddModal from './Add.vue';
 import { reqGetArticlesByTeam, reqGetDiariesByTeamName, reqGetMembersByTeamName } from '@/api/team';
 import { reactive, ref } from 'vue';
 
-const diariesList = ref([]);
-getDiaries();
-async function getDiaries() {
-  const result = await reqGetDiariesByTeamName();
-  diariesList.value = result.diaries;
+const diariesList = reactive({ count: 0, diaries: [] });
+const page = (data) => {
+  // console.log(data);
+  getDiaries(5, data);
+};
+
+async function getDiaries(PageSize, PageNo) {
+  const result = await reqGetDiariesByTeamName({ PageSize, PageNo });
+  diariesList.diaries = result.diaries;
+  diariesList.count = result.count;
   // console.log(diariesList.value);
 }
 
@@ -59,7 +64,7 @@ const handlerCancel = () => {
 <template>
   <div>
     <div class="content">
-      <div class="top"><Memories :list="diariesList" @addMemory="add" /></div>
+      <div class="top"><Memories :list="diariesList" @addMemory="add" @page="page" /></div>
       <div class="right"><Team :list="menberList" /></div>
     </div>
     <div>

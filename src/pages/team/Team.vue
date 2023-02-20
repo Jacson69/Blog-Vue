@@ -1,13 +1,21 @@
 <script setup>
-import { NCard, NDataTable, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
+import { NCard, NList, NListItem, NPagination, NSpace, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
-
+import { ref } from 'vue';
 const props = defineProps({
   list: {
     type: Object,
     required: true,
   },
 });
+
+const page = ref(0);
+const emit = defineEmits(['pageMember']);
+const clickPage = (page) => {
+  console.log(page);
+  emit('page', page - 1);
+};
+clickPage(page);
 </script>
 
 <template>
@@ -47,16 +55,32 @@ const props = defineProps({
         </div>
       </NListItem>
     </NList>
+    <div class="pagination">
+      <n-pagination
+        v-model:page="page"
+        :page-slot="3"
+        :item-count="props.list.count"
+        @click="clickPage(page)"
+        :page-size="5"
+      />
+    </div>
   </NCard>
 </template>
 <style lang="scss" scoped>
 .hot {
   // height: auto;
+  border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
+
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
   .header {
     display: flex;
     align-items: center;
-    padding-top: 10px;
+    // padding-top: 10px;
 
     .add {
       padding-left: 16px;

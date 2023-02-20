@@ -1,6 +1,11 @@
 <script setup>
-import { NCard, NDataTable, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
+import { NCard, NList, NListItem, NSpace, NSwitch, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
+import { ref } from 'vue';
+const value = ref(false);
+const handleChange = (value) => {
+  window.msg.success(`Update value: ${value}`);
+};
 </script>
 
 <template>
@@ -19,24 +24,37 @@ import SvgIcon from '@/components/SvgIcon.vue';
       <h2>设置</h2>
     </div>
 
-    <div class="title">
-      <div>名称</div>
-      <div>职位</div>
-      <div>最近活跃时间</div>
-      <div>操作</div>
+    <!-- <div>
+      <div class="list" v-for="(item,index) in list" >
+        <n-switch v-model:value="active" @update:value="handleChange" />
+        Email me when someone follows me
+      </div>
+    </div> -->
+    <div class="list">
+      <n-switch v-model:value="active" @update:value="handleChange" />
+      <!-- <span class="title">Email me when someone follows me</span> -->
+      Email me when someone follows me
     </div>
-    <!--
-    <NList hoverable clickable>
-      <NListItem v-for="item of props.list" :key="item.ID">
-        <div class="item">
-          <div>{{ item.Name }}</div>
-          <div>{{ item.Position }}</div>
-          <div>{{ item.UpdatedAt }}</div>
-          <div>发送</div>
-
-        </div>
-      </NListItem>
-    </NList> -->
+    <div class="list">
+      <n-switch v-model:value="active" @update:value="handleChange" />
+      Email me when someone follows me
+    </div>
+    <div class="list">
+      <n-switch v-model:value="active" @update:value="handleChange" />
+      Email me when someone follows me
+    </div>
+    <div class="list">
+      <n-switch v-model:value="active" @update:value="handleChange" />
+      Email me when someone follows me
+    </div>
+    <div class="list">
+      <n-switch v-model:value="active" @update:value="handleChange" />
+      Email me when someone follows me
+    </div>
+    <div class="list">
+      <n-switch v-model:value="active" @update:value="handleChange" />
+      Email me when someone follows me
+    </div>
   </NCard>
 </template>
 <style lang="scss" scoped>
@@ -48,13 +66,15 @@ import SvgIcon from '@/components/SvgIcon.vue';
     align-items: center;
     padding-top: 10px;
 
-    .add {
-      padding-left: 16px;
-      font-size: 26px;
-      cursor: pointer;
-      background-color: #fff;
-      color: #000;
+    .content {
+      padding: 200px;
     }
+  }
+  .list {
+    margin-top: 30px;
+    // .title {
+    //   margin-left: 10px;
+    // }
   }
 }
 .title {

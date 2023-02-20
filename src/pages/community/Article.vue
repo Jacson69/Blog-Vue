@@ -1,5 +1,6 @@
 <script setup>
 import { NAvatar, NCard, NImage, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
+
 const props = defineProps({
   list: {
     type: Object,
@@ -9,7 +10,20 @@ const props = defineProps({
 </script>
 
 <template>
-  <NCard title="文章" class="article">
+  <NCard
+    class="article"
+    :segmented="{
+      content: true,
+      footer: 'soft',
+    }"
+    :content-style="{
+      paddingTop: 0,
+      paddingBottom: '16px',
+    }"
+  >
+    <div class="header">
+      <h2>文章</h2>
+    </div>
     <NList hoverable clickable>
       <NListItem v-for="item of props.list.articles" :item="item" :key="item.id">
         <div>

@@ -1,15 +1,24 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { reqLogin, reqRegister } from '@/api/user';
+import { reqInfo } from '@/api/profile';
 // import { reqRegister } from '@/api';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
     token: JSON.parse(localStorage.getItem('TOKEN') || '{"token":""}').token,
-    // user: JSON.parse(
-    //   localStorage.getItem('USER') ||
-    //     '{"name": "", "telephone": "","email": "","img_url": "","sex": "","team": "","introduction": "","created_at": "","fans": 0,"follows": "",}'
-    // ),
+    user: JSON.parse(localStorage.getItem('USER') || 'null') || {
+      name: '',
+      telephone: '',
+      email: '',
+      img_url: '',
+      sex: '',
+      team: '',
+      introduction: '',
+      created_at: '',
+      fans: 0,
+      follows: '',
+    },
   }),
   getters: {
     double: (state) => state.count * 2,
@@ -33,9 +42,9 @@ export const useUserStore = defineStore('user', {
       // console.log(123)
       return result.token;
     },
-    // setUserInfo(data) {
-    //   this.user = data;
-    //   localStorage.setItem('USER', JSON.stringify(this.user));
-    // },
+    async setUserInfo() {
+      const result = await reqInfo();
+      localStorage.setItem('USER', JSON.stringify(result.user));
+    },
   },
 });

@@ -56,8 +56,8 @@ const handlerOk = () => {
           </n-form-item>
         </div>
         <div class="footer">
-          <NButton type="info" @click="handlerOk">确定</NButton>
-          <NButton type="error" @click="handlerCancel">取消</NButton>
+          <NButton type="info" @click="handlerOk" class="btn">确定</NButton>
+          <NButton type="error" @click="handlerCancel" class="btn">取消</NButton>
         </div>
       </n-form>
     </NCard>
@@ -74,5 +74,8 @@ const handlerOk = () => {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
+  .btn {
+    border-radius: 7px;
+  }
 }
 </style>

@@ -33,6 +33,7 @@ const handleLogin = async () => {
   if (token) {
     router.replace({ path: '/' });
   }
+  userStore.setUserInfo();
 };
 
 const handleRegiter = async () => {
@@ -50,6 +51,7 @@ const handleRegiter = async () => {
   if (token) {
     router.replace({ path: '/' });
   }
+  userStore.setUserInfo();
 };
 const handlerenter = (key) => {
   if (key === 0) {
@@ -130,13 +132,15 @@ const handlerenter = (key) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: 100%;
+  background-image: url('@/assets/bg.jpeg');
 }
 
 .form-structor {
   background-color: #222;
   border-radius: 15px;
   height: 550px;
-  width: 350px;
+  width: 450px;
   position: relative;
   overflow: hidden;
 

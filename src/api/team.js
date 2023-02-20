@@ -1,18 +1,25 @@
 import request from '@/utils/request';
 
-export const reqGetDiariesByTeamName = (data) =>
-  request({
+export const reqGetDiariesByTeamName = (data) => {
+  const param = new URLSearchParams();
+  param.append('PageSize', data.PageSize);
+  param.append('PageNo', data.PageNo);
+  return request({
     url: '/auth/getDiariesByTeamName',
     method: 'post',
-    data,
+    data: param,
   });
-
-export const reqGetMembersByTeamName = (data) =>
-  request({
+};
+export const reqGetMembersByTeamName = (data) => {
+  const param = new URLSearchParams();
+  param.append('PageSize', data.PageSize);
+  param.append('PageNo', data.PageNo);
+  return request({
     url: '/auth/getMembersByTeamName',
     method: 'post',
     data,
   });
+};
 
 export const reqGetArticlesByTeam = (data) =>
   request({

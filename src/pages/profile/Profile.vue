@@ -14,6 +14,7 @@ import {
   NThing,
 } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
+import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 const props = defineProps({
   userInfo: {
@@ -21,17 +22,27 @@ const props = defineProps({
     required: true,
   },
 });
-
+const userStore = useUserStore();
 const emit = defineEmits(['aaa']);
 
 const isEdit = ref(false);
 const editClick = () => {
-  isEdit.value = true;
+  if (isEdit.value === false) {
+    isEdit.value = true;
+    return;
+  }
+  isEdit.value = false;
 };
 
 const handlerCancel = () => {
   isEdit.value = false;
 };
+
+const handlerOk = () => {
+  console.log(userStore.user.name);
+};
+
+const u = userStore.user;
 </script>
 
 <template>
@@ -78,7 +89,10 @@ const handlerCancel = () => {
       <div>
         <div class="personInfo">
           <h3>个人信息</h3>
-          <NButton @click="editClick">xxx</NButton>
+          <div class="icon-wrap">
+            <SvgIcon name="edit" @click="editClick" style="cursor: pointer" />
+          </div>
+          <!-- <NButton @click="editClick" class="btn">编辑</NButton> -->
         </div>
         <div v-show="!isEdit">
           <p class="introduce">
@@ -117,25 +131,29 @@ const handlerCancel = () => {
         <div v-show="isEdit">
           <n-form
             ref="formRef"
-            :model="model"
-            :rules="rules"
             label-placement="left"
             label-width="auto"
             require-mark-placement="right-hanging"
-            :size="size"
             :style="{
               maxWidth: '640px',
             }"
           >
             <n-form-item label="昵称：" path="inputValue">
-              <n-input :value="props.userInfo.name" @input="(value) => emit('aaa', value)" />
+              <n-input
+                :value="u.name"
+                @input="
+                  (value) => {
+                    u.name = value;
+                  }
+                "
+              />
             </n-form-item>
 
             <n-form-item label="性别：" path="radioGroupValue">
-              <n-radio-group name="radiogroup1" :value="props.userInfo.sex">
+              <n-radio-group name="radiogroup1" :value="u.sex">
                 <n-space>
-                  <n-radio value="male"> 男 </n-radio>
-                  <n-radio value="female"> 女 </n-radio>
+                  <n-radio value="1"> 男 </n-radio>
+                  <n-radio value="0"> 女 </n-radio>
                 </n-space>
               </n-radio-group>
             </n-form-item>
@@ -152,11 +170,18 @@ const handlerCancel = () => {
               <span>{{ props.userInfo.created_at }}</span>
             </n-form-item>
             <n-form-item label="个性签名：" path="inputValue">
-              <n-input :value="props.userInfo.introduction" />
+              <n-input
+                :value="u.introduction"
+                @input="
+                  (value) => {
+                    u.introduction = value;
+                  }
+                "
+              />
             </n-form-item>
             <div class="footer">
-              <NButton type="info" @click="handlerOk">确定</NButton>
-              <NButton type="error" @click="handlerCancel">取消</NButton>
+              <NButton type="info" @click="handlerOk" class="btn">确定</NButton>
+              <NButton type="error" @click="handlerCancel" class="btn">取消</NButton>
             </div>
           </n-form>
         </div>
@@ -211,5 +236,8 @@ const handlerCancel = () => {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
+}
+.btn {
+  border-radius: 7px;
 }
 </style>

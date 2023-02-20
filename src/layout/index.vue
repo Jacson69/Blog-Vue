@@ -27,11 +27,13 @@ watchEffect(() => {
   display: flex;
   width: 100vw;
   height: 100vh;
+  background-color: #cbcaca;
   // overflow: hidden;
   .main-container {
     flex-grow: 1;
     width: auto;
     padding: 0 40px;
+    background-color: #cc8888;
   }
 }
 </style>
