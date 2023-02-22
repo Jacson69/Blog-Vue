@@ -1,5 +1,5 @@
 <script setup>
-import { NCard, NList, NListItem, NPagination, NSpace, NTag, NThing } from 'naive-ui';
+import { NAvatar, NCard, NList, NListItem, NPagination, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { ref } from 'vue';
 
@@ -12,7 +12,7 @@ const props = defineProps({
 const page = ref(0);
 const emit = defineEmits(['addMemory', 'page']);
 const clickPage = (page) => {
-  // console.log(page);
+  console.log(page);
   emit('page', page - 1);
 };
 clickPage(page);
@@ -45,9 +45,16 @@ clickPage(page);
     <NList hoverable clickable class="list">
       <NListItem v-for="item of props.list.diaries" :key="item.ID">
         <div class="item">
-          <div>{{ item.Name }}</div>
+          <div class="avatar">
+            <div>
+              <n-avatar round :size="45" :src="item.Avatar" />
+            </div>
+            <div style="padding-left: 6px">{{ item.Name }}</div>
+          </div>
           <div>{{ item.Context }}</div>
-          <div>{{ item.Position }}</div>
+          <div class="level" :class="item.Status ? 'primary' : 'muted'">
+            {{ item.Status ? '紧急' : '一般' }}
+          </div>
           <div>{{ item.Employed }}</div>
           <!-- <div class="name left">
             {{ item.Name }}
@@ -74,7 +81,7 @@ clickPage(page);
   // margin-left: 10px;
   box-shadow: 0px 5px 8px rgb(0 0 0 / 15%);
   .list {
-    min-height: 233px;
+    min-height: 378px;
   }
   .pagination {
     display: flex;
@@ -106,6 +113,23 @@ clickPage(page);
   display: flex;
   align-items: center;
   justify-content: space-around;
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  .level {
+    background-color: pink;
+    border-radius: 6px;
+    padding: 3px 12px;
+  }
+  .primary {
+    background-color: rgb(123, 204, 234);
+  }
+
+  .muted {
+    background-color: #d2cece;
+  }
   // text-align: center;
   // :nth-child(1) {
   //   width: 20%;

@@ -3,6 +3,7 @@ import { watchEffect } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import SideBar from './SideBar.vue';
 import Header from './Header.vue';
+import { NScrollbar } from 'naive-ui';
 const route = useRoute();
 
 watchEffect(() => {
@@ -15,9 +16,11 @@ watchEffect(() => {
     <SideBar />
     <div class="main-container">
       <Header />
-      <div class="view">
-        <RouterView />
-      </div>
+      <n-scrollbar>
+        <div class="view">
+          <RouterView />
+        </div>
+      </n-scrollbar>
     </div>
   </div>
 </template>
@@ -27,13 +30,20 @@ watchEffect(() => {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: #cbcaca;
+  // background-color: #cbcaca;
   // overflow: hidden;
   .main-container {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     width: auto;
-    padding: 0 40px;
-    background-color: #cc8888;
+    // padding: 0 40px;
+    // background-color: #cc8888;
+    overflow: hidden;
+    height: 100vh;
+    .view {
+      padding: 0 40px;
+    }
   }
 }
 </style>

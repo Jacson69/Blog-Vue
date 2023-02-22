@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-
+import moment from 'moment';
 export const reqInfo = () =>
   request({
     url: '/auth/info',
@@ -13,13 +13,18 @@ export const reqEditUserInfo = (data) =>
     data,
   });
 
-export const reqGetArticlesByUser = (data) => {
+export const reqGetArticlesByUser = async (data) => {
   const param = new URLSearchParams();
   param.append('PageSize', data.PageSize);
   param.append('PageNo', data.PageNo);
-  return request({
+  const result = await request({
     url: '/auth/getArticlesByUser',
     method: 'post',
     data: param,
   });
+  result.articles = result.articles.map((value) => ({
+    ...value,
+    CreatedAt: moment(value.CreatedAt).format('YYYY-MM-DD h:mm'),
+  }));
+  return result;
 };

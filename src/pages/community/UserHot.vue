@@ -1,5 +1,5 @@
 <script setup>
-import { NCard, NDataTable, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
+import { NAvatar, NCard, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
 
 const props = defineProps({
@@ -42,8 +42,11 @@ const props = defineProps({
     <NList hoverable clickable>
       <NListItem v-for="item of props.list" :key="item.ID">
         <div class="item">
-          <div class="name left">
-            {{ item.Name }}
+          <div class="avatar left name">
+            <div>
+              <n-avatar round :size="25" :src="item.Img_url" />
+            </div>
+            <div style="padding-left: 6px">{{ item.Name }}</div>
           </div>
           <div>{{ item.Fans }}</div>
         </div>
@@ -73,5 +76,10 @@ const props = defineProps({
 }
 .left {
   width: 70%;
+}
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
 </style>

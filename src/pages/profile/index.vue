@@ -7,7 +7,10 @@ import ShowArticle from '@/components/ShowArticle.vue';
 import { NModal } from 'naive-ui';
 const articleList = reactive({ count: 0, articles: [] });
 
-getArticleByUser(10, 0);
+const page = (data) => {
+  // console.log(data);
+  getArticleByUser(5, data);
+};
 
 async function getArticleByUser(PageSize, PageNo) {
   // console.log(PageNo);
@@ -45,7 +48,7 @@ const handlerCancel = () => {
 </script>
 <template>
   <div class="content">
-    <div class="left"><Article :list="articleList" @view="handlerView" /></div>
+    <div class="left"><Article :list="articleList" @view="handlerView" @page="page" /></div>
     <div class="right">
       <!-- <ArticleHot :list="articleHotList" /> -->
       <Profile :userInfo="userInfo" />
@@ -68,16 +71,20 @@ const handlerCancel = () => {
 
 <style lang="scss" scoped>
 .content {
+  position: relative;
   display: flex;
   // justify-content: space-between;
   /* border-radius: 8px; */
   /* background-color: pink; */
   margin: 16px 0;
-  min-width: 900px;
-  overflow: auto;
+  // min-width: 900px;
+
+  // overflow: auto;
   .left {
-    flex-grow: 1;
+    // flex-grow: 1;
     padding-right: 20px;
+    width: 70%;
+    box-sizing: border-box;
   }
   .right {
     width: 30%;

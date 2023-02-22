@@ -33,11 +33,12 @@ import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
 
 <style lang="scss" scoped>
 .header {
+  flex-grow: 0;
   background-color: #f9efef;
   display: flex;
   border-radius: 8px;
   justify-content: space-between;
-  margin: 16px 0;
+  margin: 16px 40px;
   height: auto;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
   .left {

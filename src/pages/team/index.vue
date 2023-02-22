@@ -19,12 +19,16 @@ async function getDiaries(PageSize, PageNo) {
   diariesList.count = result.count;
   // console.log(diariesList.value);
 }
+const pageMember = (data) => {
+  // console.log(data);
+  getMembers(5, data);
+};
+const menberList = reactive({ count: 0, members: [] });
 
-const menberList = ref([]);
-getMembers();
-async function getMembers() {
-  const result = await reqGetMembersByTeamName();
-  menberList.value = result.members;
+async function getMembers(PageSize, PageNo) {
+  const result = await reqGetMembersByTeamName({ PageSize, PageNo });
+  menberList.members = result.members;
+  menberList.count = result.count;
   // console.log(menberList.value);
 }
 
@@ -65,7 +69,7 @@ const handlerCancel = () => {
   <div>
     <div class="content">
       <div class="top"><Memories :list="diariesList" @addMemory="add" @page="page" /></div>
-      <div class="right"><Team :list="menberList" /></div>
+      <div class="right"><Team :list="menberList" @pageMember="pageMember" /></div>
     </div>
     <div>
       <div class="left"><TeamArticle :list="articleList" /></div>
@@ -84,7 +88,7 @@ const handlerCancel = () => {
   display: flex;
   margin: 16px 0;
   min-width: 900px;
-  overflow: auto;
+  // overflow: auto;
 }
 .top {
   flex-grow: 1;

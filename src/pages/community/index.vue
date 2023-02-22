@@ -74,7 +74,7 @@ async function getTeamHot(obj) {
   /* background-color: pink; */
   margin: 16px 0;
   min-width: 900px;
-  overflow: auto;
+  // overflow: auto;
   .left {
     flex-grow: 1;
     padding-right: 20px;

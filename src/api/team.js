@@ -1,32 +1,48 @@
 import request from '@/utils/request';
-
-export const reqGetDiariesByTeamName = (data) => {
+import moment from 'moment';
+export const reqGetDiariesByTeamName = async (data) => {
   const param = new URLSearchParams();
   param.append('PageSize', data.PageSize);
   param.append('PageNo', data.PageNo);
-  return request({
+  const result = await request({
     url: '/auth/getDiariesByTeamName',
     method: 'post',
     data: param,
   });
+  result.diaries = result.diaries.map((value) => ({
+    ...value,
+    Employed: moment(value.Employed).format('YYYY-MM-DD'),
+  }));
+  return result;
 };
-export const reqGetMembersByTeamName = (data) => {
+export const reqGetMembersByTeamName = async (data) => {
   const param = new URLSearchParams();
   param.append('PageSize', data.PageSize);
   param.append('PageNo', data.PageNo);
-  return request({
+  const result = await request({
     url: '/auth/getMembersByTeamName',
     method: 'post',
-    data,
+    data: param,
   });
+  result.members = result.members.map((value) => ({
+    ...value,
+    UpdatedAt: moment(value.UpdatedAt).format('YYYY-MM-DD'),
+  }));
+  return result;
 };
 
-export const reqGetArticlesByTeam = (data) =>
-  request({
+export const reqGetArticlesByTeam = async (data) => {
+  const result = await request({
     url: '/auth/getArticlesByTeam',
     method: 'post',
     data,
   });
+  result.articles = result.articles.map((value) => ({
+    ...value,
+    CreatedAt: moment(value.CreatedAt).format('YYYY-MM-DD h:mm'),
+  }));
+  return result;
+};
 
 export const reqAddTeamDiary = (data) =>
   request({

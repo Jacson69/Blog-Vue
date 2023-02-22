@@ -1,5 +1,5 @@
 <script setup>
-import { NCard, NList, NListItem, NPagination, NSpace, NTag, NThing } from 'naive-ui';
+import { NAvatar, NCard, NList, NListItem, NPagination, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { ref } from 'vue';
 const props = defineProps({
@@ -12,8 +12,9 @@ const props = defineProps({
 const page = ref(0);
 const emit = defineEmits(['pageMember']);
 const clickPage = (page) => {
+  console.log('-------------------------------');
   console.log(page);
-  emit('page', page - 1);
+  emit('pageMember', page - 1);
 };
 clickPage(page);
 </script>
@@ -41,10 +42,15 @@ clickPage(page);
       <div>操作</div>
     </div>
 
-    <NList hoverable clickable>
-      <NListItem v-for="item of props.list" :key="item.ID">
+    <NList hoverable clickable class="list">
+      <NListItem v-for="item of props.list.members" :key="item.ID">
         <div class="item">
-          <div>{{ item.Name }}</div>
+          <div class="avatar">
+            <div>
+              <n-avatar round :size="45" :src="item.Img_url" />
+            </div>
+            <div style="padding-left: 6px">{{ item.Name }}</div>
+          </div>
           <div>{{ item.Position }}</div>
           <div>{{ item.UpdatedAt }}</div>
           <div>发送</div>
@@ -71,7 +77,9 @@ clickPage(page);
   // height: auto;
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
-
+  .list {
+    min-height: 233px;
+  }
   .pagination {
     display: flex;
     justify-content: flex-end;
@@ -102,6 +110,11 @@ clickPage(page);
   display: flex;
   align-items: center;
   justify-content: space-around;
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
   // text-align: center;
   // :nth-child(1) {
   //   width: 20%;

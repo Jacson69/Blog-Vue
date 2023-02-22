@@ -42,9 +42,15 @@ export const useUserStore = defineStore('user', {
       // console.log(123)
       return result.token;
     },
-    async setUserInfo() {
-      const result = await reqInfo();
-      localStorage.setItem('USER', JSON.stringify(result.user));
+    async setUserInfo(data) {
+      if (!data) {
+        const result = await reqInfo();
+        localStorage.setItem('USER', JSON.stringify(result.user));
+        this.user = result.user;
+      } else {
+        localStorage.setItem('USER', JSON.stringify(data));
+        this.user = data;
+      }
     },
   },
 });
