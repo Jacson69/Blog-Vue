@@ -1,12 +1,75 @@
 <script setup>
-import { NAvatar, NCard, NImage, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
-
+import {
+  NAvatar,
+  NCard,
+  NImage,
+  NList,
+  NListItem,
+  NPagination,
+  NSpace,
+  NTag,
+  NThing,
+} from 'naive-ui';
+import SvgIcon from '@/components/SvgIcon.vue';
+import { reactive, ref } from 'vue';
+import { useUserStore } from '@/stores/user';
+import { reqUpdateArticles } from '@/api/article';
 const props = defineProps({
   list: {
     type: Object,
     required: true,
   },
 });
+console.log(props.list.articles);
+let articleRecord = reactive({
+  Title: '',
+  Author: '',
+  Team: '',
+  Liked: '',
+  Disliked: '',
+});
+const userStore = useUserStore();
+const emit = defineEmits(['page', 'view', 'update']);
+const u = reactive({ ...userStore.user });
+const Like = (val) => {
+  if (val.Liked) {
+    return;
+  }
+  articleRecord = reactive({
+    Title: val.Title,
+    Author: u.name,
+    Team: u.team,
+    Liked: true,
+    Disliked: false,
+  });
+  reqUpdateArticles(articleRecord);
+  emit('update');
+};
+const disLike = (val) => {
+  if (val.Disliked) {
+    return;
+  }
+  articleRecord = reactive({
+    Title: val.Title,
+    Author: u.name,
+    Team: u.team,
+    Liked: false,
+    Disliked: true,
+  });
+  reqUpdateArticles(articleRecord);
+  emit('update');
+};
+
+const page = ref(0);
+const clickPage = (page) => {
+  emit('page', page - 1);
+};
+clickPage(page);
+
+const handlerPreview = (id) => {
+  // console.log(id);
+  emit('view', id);
+};
 </script>
 
 <template>
@@ -25,9 +88,13 @@ const props = defineProps({
       <h2>文章</h2>
     </div>
     <NList hoverable clickable>
-      <NListItem v-for="item of props.list.articles" :item="item" :key="item.id">
+      <NListItem v-for="(item, index) of props.list.articles" :item="item" :key="item.ID">
         <div>
-          <NThing title="相见恨晚" content-style="margin-top: 10px;">
+          <NThing
+            title="相见恨晚"
+            content-style="margin-top: 10px;"
+            @click="handlerPreview(item.ID)"
+          >
             <template #avatar>
               <NAvatar>
                 <NImage
@@ -51,6 +118,20 @@ const props = defineProps({
         </div>
         {{ item.CreatedAt }} <br />
         {{ item.Description }}
+        <div>
+          <SvgIcon
+            :name="`${item.Liked ? 'like' : 'likek'}`"
+            :class="`${item.Liked ? 'active ' : ''}icon-wrap`"
+            @click="Like(item)"
+          />
+          {{ item.Like }}
+          <SvgIcon
+            :name="`${item.Disliked ? 'dislike' : 'dislikek'}`"
+            :class="`${item.Disliked ? 'active ' : ''}icon-wrap`"
+            @click="disLike(item)"
+          />
+          {{ item.Dislike }}
+        </div>
         <!-- <div>
             <NAvatar>
               <NImage
@@ -60,6 +141,15 @@ const props = defineProps({
             </NAvatar>
           </div> -->
       </NListItem>
+      <div class="pagination">
+        <n-pagination
+          v-model:page="page"
+          :page-slot="3"
+          :item-count="props.list.count"
+          @click="clickPage(page)"
+          :page-size="5"
+        />
+      </div>
     </NList>
   </NCard>
 </template>
@@ -67,5 +157,20 @@ const props = defineProps({
 .article {
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
+}
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+.icon-wrap {
+  // color: aqua;
+  cursor: pointer;
+  padding-right: 5px;
+  text-align: center;
+  &.active {
+    color: rgb(97, 96, 97);
+    background-color: aqu;
+  }
 }
 </style>

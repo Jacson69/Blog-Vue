@@ -30,7 +30,7 @@ watchEffect(() => {
   display: flex;
   width: 100vw;
   height: 100vh;
-  // background-color: #cbcaca;
+  background-color: #fafafa;
   // overflow: hidden;
   .main-container {
     display: flex;

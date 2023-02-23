@@ -4,7 +4,9 @@ import Team from './Team.vue';
 import TeamArticle from './TeamArticle.vue';
 import Resource from './Resource.vue';
 import AddModal from './Add.vue';
+import ShowArticle from '@/components/ShowArticle.vue';
 import { reqGetArticlesByTeam, reqGetDiariesByTeamName, reqGetMembersByTeamName } from '@/api/team';
+import { NCard, NModal } from 'naive-ui';
 import { reactive, ref } from 'vue';
 
 const diariesList = reactive({ count: 0, diaries: [] });
@@ -24,16 +26,24 @@ const pageMember = (data) => {
   getMembers(5, data);
 };
 const menberList = reactive({ count: 0, members: [] });
-
+const isTeam = ref(true);
 async function getMembers(PageSize, PageNo) {
   const result = await reqGetMembersByTeamName({ PageSize, PageNo });
   menberList.members = result.members;
   menberList.count = result.count;
   // console.log(menberList.value);
+  if (menberList.count === 0) {
+    isTeam.value = false;
+  }
 }
 
 const articleList = reactive({ count: 0, articles: [] });
-getArticles({ PageSize: 5, PageNo: 0 });
+
+const pageArticle = (data) => {
+  // console.log(data);
+  // getArticle(8, data);
+  getArticles({ PageSize: 5, PageNo: data });
+};
 async function getArticles(obj) {
   const result = await reqGetArticlesByTeam(obj);
   articleList.articles = result.articles;
@@ -50,6 +60,24 @@ function add() {
 const handlerCancel = () => {
   showModal.value = false;
 };
+
+const isShow = ref(false);
+const article = ref({});
+const handlerView = (id) => {
+  console.log(id);
+  for (let i = 0; i < articleList.articles.length; i++) {
+    if (id === articleList.articles[i].ID) {
+      article.value = articleList.articles[i];
+    }
+  }
+  isShow.value = true;
+  // console.log(article.value);
+  console.log(isShow);
+};
+const handlerCancelArticleModal = () => {
+  isShow.value = false;
+};
+
 // const data = reactive({ title: '', description: '', context: '', status: false });
 // const handlerOk = async (obj) => {
 //   if (data.context === '') {
@@ -67,15 +95,44 @@ const handlerCancel = () => {
 </script>
 <template>
   <div>
-    <div class="content">
+    <div class="content" v-show="!isTeam">
       <div class="top"><Memories :list="diariesList" @addMemory="add" @page="page" /></div>
       <div class="right"><Team :list="menberList" @pageMember="pageMember" /></div>
     </div>
+    <div v-show="isTeam">
+      <NCard
+        :segmented="{
+          content: true,
+          footer: 'soft',
+        }"
+        :content-style="{
+          paddingTop: 0,
+          paddingBottom: '16px',
+        }"
+        class="hot"
+      >
+        <div class="header">
+          <h2>团队留言</h2>
+        </div>
+      </NCard>
+    </div>
     <div>
-      <div class="left"><TeamArticle :list="articleList" /></div>
+      <div class="left">
+        <TeamArticle :list="articleList" @page="pageArticle" @view="handlerView" />
+      </div>
       <div class="bottom"><Resource /></div>
     </div>
     <AddModal :wModal="showModal" @close="handlerCancel" />
+    <n-modal
+      :show="isShow"
+      preset="card"
+      title="文章"
+      style="width: 900px"
+      @mask-click="handlerCancelArticleModal"
+      @close="handlerCancelArticleModal"
+    >
+      <ShowArticle :article="article" />
+    </n-modal>
   </div>
 
   <!-- <div>

@@ -46,3 +46,10 @@ export const reqSaveArticle = (data) =>
     method: 'post',
     data,
   });
+
+export const reqUpdateArticles = (data) =>
+  request({
+    url: '/auth/updateArticles',
+    method: 'post',
+    data,
+  });

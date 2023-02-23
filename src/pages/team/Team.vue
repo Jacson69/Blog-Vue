@@ -78,7 +78,7 @@ clickPage(page);
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
   .list {
-    min-height: 233px;
+    min-height: 378px;
   }
   .pagination {
     display: flex;

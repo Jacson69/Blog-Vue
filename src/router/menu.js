@@ -3,29 +3,29 @@ export default [
     path: 'order',
     name: 'ORDER',
     component: () => import('@/pages/order/index.vue'),
-    redirect: '/order/list',
+    // redirect: '/order/list',
     meta: {
       label: '首页',
       icon: 'sy',
     },
-    children: [
-      {
-        path: 'list',
-        name: 'ORDER-LIST',
-        meta: {
-          label: '订单列表',
-        },
-        component: () => import('@/pages/order/list/index.vue'),
-      },
-      {
-        path: 'add',
-        name: 'ORDER-ADD',
-        meta: {
-          label: '添加订单',
-        },
-        component: () => import('@/pages/order/add/index.vue'),
-      },
-    ],
+    // children: [
+    //   {
+    //     path: 'list',
+    //     name: 'ORDER-LIST',
+    //     meta: {
+    //       label: '订单列表',
+    //     },
+    //     component: () => import('@/pages/order/list/index.vue'),
+    //   },
+    //   {
+    //     path: 'add',
+    //     name: 'ORDER-ADD',
+    //     meta: {
+    //       label: '添加订单',
+    //     },
+    //     component: () => import('@/pages/order/add/index.vue'),
+    //   },
+    // ],
   },
   {
     path: 'team',

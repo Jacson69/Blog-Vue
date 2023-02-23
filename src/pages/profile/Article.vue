@@ -18,6 +18,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  listCollection: {
+    type: Object,
+    required: true,
+  },
 });
 
 // props.list.map((item) => {
@@ -25,20 +29,27 @@ const props = defineProps({
 // });
 // console.log('list', props.list);
 
-const emit = defineEmits(['view', 'page']);
+const emit = defineEmits(['view', 'view2', 'page', 'page2']);
 const handlerPreview = (id) => {
-  console.log(id);
+  // console.log(id);
   emit('view', id);
 };
-
+const handlerPreview2 = (id) => {
+  // console.log(id);
+  emit('view2', id);
+};
 const page = ref(0);
+const page2 = ref(0);
 const clickPage = (page) => {
   console.log(page);
   emit('page', page - 1);
 };
 clickPage(page);
-
-const editClick = () => {};
+const clickPage2 = (page) => {
+  console.log(page);
+  emit('page2', page - 1);
+};
+const isShow = ref('article');
 </script>
 
 <template>
@@ -57,22 +68,24 @@ const editClick = () => {};
     <div class="header">
       <div><h2>文章</h2></div>
       <div>
-        <n-radio-group name="radiobuttongroup1">
-          <n-radio-button value="article" label="文章" @click="editClick" />
-          <n-radio-button value="collection" label="收藏" @click="editClick" />
+        <n-radio-group name="radiobuttongroup1" v-model:value="isShow">
+          <n-radio-button value="article" label="文章" @click="clickPage(0)" />
+          <n-radio-button value="collection" label="收藏" @click="clickPage2(0)" />
         </n-radio-group>
       </div>
     </div>
-    <NList hoverable clickable>
-      <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
-        <div class="articleItem">
-          <div>
-            <NThing
-              title="相见恨晚"
-              content-style="margin-top: 10px;"
-              @click="handlerPreview(item.ID)"
-            >
-              <!-- <template #avatar>
+    <div v-show="isShow === 'article'">
+      <NList hoverable clickable>
+        <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
+          <div class="listItem">
+            <div class="articleItem">
+              <div>
+                <NThing
+                  title="相见恨晚"
+                  content-style="margin-top: 10px;"
+                  @click="handlerPreview(item.ID)"
+                >
+                  <!-- <template #avatar>
               <NAvatar>
                 <NImage
                   width="100"
@@ -81,83 +94,91 @@ const editClick = () => {};
               </NAvatar>
             </template> -->
 
-              <template #header>
-                <div>
-                  <h3>{{ item.Title }}</h3>
-                </div>
-              </template>
-              <template #description>
-                <NSpace size="small" style="margin-top: 4px">
-                  <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
-                  <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
-                </NSpace>
-              </template>
-              {{ item.CreatedAt }} <br />
-              {{ item.Description }}
-            </NThing>
-            <div class="icon-wrap">
-              <SvgIcon name="like" style="cursor: pointer" />
-              100
-              <SvgIcon name="dislike" style="cursor: pointer" />
-              100
+                  <template #header>
+                    <div>
+                      <h3>{{ item.Title }}</h3>
+                    </div>
+                  </template>
+                  <template #description>
+                    <NSpace size="small" style="margin-top: 4px">
+                      <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
+                      <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
+                      <!-- <div class="time">{{ item.CreatedAt }}</div> -->
+                    </NSpace>
+                  </template>
+                  {{ item.Description }}
+                  <br />
+                  <div class="time">{{ item.CreatedAt }}</div>
+                </NThing>
+                <!-- <template #suffix> -->
+                <!-- <img width="272" src="@/assets/bg.jpeg" alt="" /> -->
+                <!-- <template /> -->
+              </div>
             </div>
+            <img width="272" src="@/assets/bg.jpeg" alt="" />
           </div>
+        </NListItem>
+        <div class="pagination">
+          <n-pagination
+            v-model:page="page"
+            :page-slot="3"
+            :item-count="props.list.count"
+            @click="clickPage(page)"
+            :page-size="5"
+          />
+        </div>
+      </NList>
+    </div>
+    <div v-show="isShow === 'collection'">
+      <NList hoverable clickable>
+        <NListItem v-for="item of props.listCollection.articles" :item="item" :key="item.ID">
+          <div class="articleItem">
+            <div>
+              <NThing
+                title="相见恨晚"
+                content-style="margin-top: 10px;"
+                @click="handlerPreview2(item.ID)"
+              >
+                <!-- <template #avatar>
+              <NAvatar>
+                <NImage
+                  width="100"
+                  :src="'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'"
+                />
+              </NAvatar>
+            </template> -->
 
-          <!-- <div class="image"><img src="@/assets/bg.jpeg" alt="" /></div> -->
-        </div>
-      </NListItem>
-      <div class="pagination">
-        <n-pagination
-          v-model:page="page"
-          :page-slot="3"
-          :item-count="props.list.count"
-          @click="clickPage(page)"
-          :page-size="5"
-        />
-      </div>
-    </NList>
-    <!-- <NList hoverable clickable>
-      <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
-        <div class="articleItem">
-          <div>
-            <NThing
-              title="相见恨晚"
-              content-style="margin-top: 10px;"
-              @click="handlerPreview(item.ID)"
-            >
-              <template #header>
-                <div>
-                  <h3>{{ item.Title }}</h3>
-                </div>
-              </template>
-              <template #description>
-                <NSpace size="small" style="margin-top: 4px">
-                  <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
-                  <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
-                </NSpace>
-              </template>
-              {{ item.CreatedAt }} <br />
-              {{ item.Description }}
-            </NThing>
-            <div class="icon-wrap">
-              <SvgIcon name="like" style="cursor: pointer" />
-              100
-              <SvgIcon name="dislike" style="cursor: pointer" />
-              100
+                <template #header>
+                  <div>
+                    <h3>{{ item.Title }}</h3>
+                  </div>
+                </template>
+                <template #description>
+                  <NSpace size="small" style="margin-top: 4px">
+                    <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
+                    <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
+                  </NSpace>
+                </template>
+                {{ item.Description }}
+                <br />
+                {{ item.CreatedAt }}
+              </NThing>
             </div>
+
+            <!-- <div class="image"><img src="@/assets/bg.jpeg" alt="" /></div> -->
           </div>
+        </NListItem>
+        <div class="pagination">
+          <n-pagination
+            v-model:page="page2"
+            :page-slot="3"
+            :item-count="props.listCollection.count"
+            @click="clickPage2(page2)"
+            :page-size="5"
+          />
         </div>
-      </NListItem>
-      <div class="pagination">
-        <n-pagination
-          v-model:page="page"
-          :page-slot="3"
-          :item-count="props.list.count"
-          @click="clickPage(page)"
-          :page-size="5"
-        />
-      </div>
-    </NList> -->
+      </NList>
+    </div>
   </NCard>
 </template>
 <style lang="scss" scoped>
@@ -176,17 +197,28 @@ const editClick = () => {};
   // box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   // margin: 5px;
-  .articleItem {
+  .listItem {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    .image {
-      width: 50px;
-      height: 30px;
+    justify-content: space-between;
+    gap: 15px;
+    .articleItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-grow: 1;
+      .image {
+        width: 50px;
+        height: 30px;
+      }
     }
   }
 }
-// .icon-wrap {
-//   color: #fff;
-// }
+
+.time {
+  color: gray;
+  font-weight: 700;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  // padding-left: 40px;
+}
 </style>

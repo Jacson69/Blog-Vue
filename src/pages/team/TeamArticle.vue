@@ -1,5 +1,16 @@
 <script setup>
-import { NAvatar, NCard, NImage, NList, NListItem, NSpace, NTag, NThing } from 'naive-ui';
+import {
+  NAvatar,
+  NCard,
+  NImage,
+  NList,
+  NListItem,
+  NPagination,
+  NSpace,
+  NTag,
+  NThing,
+} from 'naive-ui';
+import { ref } from 'vue';
 const props = defineProps({
   list: {
     type: Object,
@@ -7,6 +18,17 @@ const props = defineProps({
   },
 });
 console.log(props.list.articles);
+const emit = defineEmits(['view', 'page']);
+const page = ref(0);
+const clickPage = (page) => {
+  emit('page', page - 1);
+};
+clickPage(page);
+
+const handlerPreview = (id) => {
+  // console.log(id);
+  emit('view', id);
+};
 </script>
 
 <template>
@@ -25,9 +47,13 @@ console.log(props.list.articles);
       <h2>团队文章</h2>
     </div>
     <NList hoverable clickable>
-      <NListItem v-for="item of props.list.articles" :item="item" :key="item.id">
+      <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
         <div>
-          <NThing title="相见恨晚" content-style="margin-top: 10px;">
+          <NThing
+            title="相见恨晚"
+            content-style="margin-top: 10px;"
+            @click="handlerPreview(item.ID)"
+          >
             <template #avatar>
               <NAvatar>
                 <NImage
@@ -60,6 +86,15 @@ console.log(props.list.articles);
             </NAvatar>
           </div> -->
       </NListItem>
+      <div class="pagination">
+        <n-pagination
+          v-model:page="page"
+          :page-slot="3"
+          :item-count="props.list.count"
+          @click="clickPage(page)"
+          :page-size="5"
+        />
+      </div>
     </NList>
   </NCard>
 </template>
@@ -67,5 +102,10 @@ console.log(props.list.articles);
 .article {
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
+}
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
 }
 </style>

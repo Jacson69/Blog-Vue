@@ -24,7 +24,7 @@ const props = defineProps({
   },
 });
 const userStore = useUserStore();
-const emit = defineEmits(['aaa']);
+const emit = defineEmits(['updateSex']);
 
 const isEdit = ref(false);
 const editClick = () => {
@@ -45,6 +45,7 @@ const handlerOk = async () => {
   window.msg.success('保存成功！');
   userStore.setUserInfo(u);
   handlerCancel();
+  emit('updateSex');
 };
 
 const u = reactive({ ...userStore.user });
@@ -114,10 +115,11 @@ const u = reactive({ ...userStore.user });
               <n-descriptions-item label="性别">
                 <NAvatar
                   round
+                  size="small"
                   :src="
-                    props.userInfo.sex === 1
-                      ? 'https://iconfont.alicdn.com/t/4b96c6e7-83b8-4299-b819-f5060217859c.png'
-                      : 'https://iconfont.alicdn.com/s/e2db101c-1437-4e12-9cd5-451c594b5306_origin.svg'
+                    props.userInfo.sex == 1
+                      ? 'https://img1.baidu.com/it/u=3228285249,3700670542&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'
+                      : 'https://img95.699pic.com/xsj/0o/6b/9o.jpg%21/fw/700/watermark/url/L3hzai93YXRlcl9kZXRhaWwyLnBuZw/align/southeast'
                   "
                 />
               </n-descriptions-item>

@@ -1,7 +1,7 @@
 <script setup>
 import Profile from './Profile.vue';
 import Article from './Article.vue';
-import { reqEditUserInfo, reqGetArticlesByUser, reqInfo } from '@/api/profile';
+import { reqGetArticlesByLike, reqGetArticlesByUser, reqInfo } from '@/api/profile';
 import { reactive, ref } from 'vue';
 import ShowArticle from '@/components/ShowArticle.vue';
 import { NModal } from 'naive-ui';
@@ -18,6 +18,19 @@ async function getArticleByUser(PageSize, PageNo) {
   const result = await reqGetArticlesByUser({ PageSize, PageNo });
   articleList.articles = result.articles;
   articleList.count = result.count;
+}
+
+const page2 = (data) => {
+  // console.log(data);
+  getArticleByLike(5, data);
+};
+const articleColList = reactive({ count: 0, articles: [] });
+async function getArticleByLike(PageSize, PageNo) {
+  // console.log(PageNo);
+  // console.log(PageSize);
+  const result = await reqGetArticlesByLike({ PageSize, PageNo });
+  articleColList.articles = result.articles;
+  articleColList.count = result.count;
 }
 
 const userInfo = ref({});
@@ -41,17 +54,39 @@ const handlerView = (id) => {
   // console.log(article.value);
   console.log(isShow);
 };
-
+const handlerView2 = (id) => {
+  console.log(id);
+  for (let i = 0; i < articleColList.articles.length; i++) {
+    if (id === articleColList.articles[i].ID) {
+      article.value = articleColList.articles[i];
+    }
+  }
+  isShow.value = true;
+  // console.log(article.value);
+  console.log(isShow);
+};
 const handlerCancel = () => {
   isShow.value = false;
+};
+const updateSex = () => {
+  getUser();
 };
 </script>
 <template>
   <div class="content">
-    <div class="left"><Article :list="articleList" @view="handlerView" @page="page" /></div>
+    <div class="left">
+      <Article
+        :list="articleList"
+        :listCollection="articleColList"
+        @view="handlerView"
+        @view2="handlerView2"
+        @page="page"
+        @page2="page2"
+      />
+    </div>
     <div class="right">
       <!-- <ArticleHot :list="articleHotList" /> -->
-      <Profile :userInfo="userInfo" />
+      <Profile :userInfo="userInfo" @updateSex="updateSex" />
       <!-- <TeamHot :list="teamHotList" /> -->
     </div>
   </div>

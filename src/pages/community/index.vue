@@ -10,10 +10,14 @@ import {
   reqGetUsersHot,
 } from '@/api/article';
 import { reactive, ref } from 'vue';
-
+import { NModal } from 'naive-ui';
+import ShowArticle from '@/components/ShowArticle.vue';
 const articleList = reactive({ count: 0, articles: [], user: [] });
 
-getArticle(10, 0);
+const page = (data) => {
+  // console.log(data);
+  getArticle(8, data);
+};
 
 async function getArticle(PageSize, PageNo) {
   // console.log(PageNo);
@@ -54,16 +58,44 @@ async function getTeamHot(obj) {
   const result = await reqGetTeamsHot(obj);
   teamHotList.value = result.teams;
 }
+
+const isShow = ref(false);
+const article = ref({});
+const handlerView = (id) => {
+  console.log(id);
+  for (let i = 0; i < articleList.articles.length; i++) {
+    if (id === articleList.articles[i].ID) {
+      article.value = articleList.articles[i];
+    }
+  }
+  isShow.value = true;
+  // console.log(article.value);
+  console.log(isShow);
+};
+
+const handlerCancelArticleModal = () => {
+  isShow.value = false;
+};
 </script>
 <template>
   <div class="content">
-    <div class="left"><Article :list="articleList" /></div>
+    <div class="left"><Article :list="articleList" @page="page" @view="handlerView" /></div>
     <div class="right">
       <ArticleHot :list="articleHotList" />
       <UserHot :list="userHotList" class="user" />
       <TeamHot :list="teamHotList" />
     </div>
   </div>
+  <n-modal
+    :show="isShow"
+    preset="card"
+    title="文章"
+    style="width: 900px"
+    @mask-click="handlerCancelArticleModal"
+    @close="handlerCancelArticleModal"
+  >
+    <ShowArticle :article="article" />
+  </n-modal>
 </template>
 
 <style lang="scss" scoped>

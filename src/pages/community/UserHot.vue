@@ -24,7 +24,7 @@ const props = defineProps({
   >
     <div class="item">
       <div class="left">
-        <h3>今日博主热度榜单</h3>
+        <h3>博主热度榜单</h3>
       </div>
       <div>
         <p>

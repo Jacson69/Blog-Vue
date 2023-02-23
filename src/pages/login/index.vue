@@ -33,7 +33,7 @@ const handleLogin = async () => {
   if (token) {
     router.replace({ path: '/' });
   }
-  userStore.setUserInfo();
+  // userStore.setUserInfo();
 };
 
 const handleRegiter = async () => {
