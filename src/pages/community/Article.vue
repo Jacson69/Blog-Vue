@@ -31,7 +31,7 @@ let articleRecord = reactive({
 const userStore = useUserStore();
 const emit = defineEmits(['page', 'view', 'update']);
 const u = reactive({ ...userStore.user });
-const Like = (val) => {
+const Like = (val, index) => {
   if (val.Liked) {
     return;
   }
@@ -43,9 +43,9 @@ const Like = (val) => {
     Disliked: false,
   });
   reqUpdateArticles(articleRecord);
-  emit('update');
+  emit('update', index, true, false);
 };
-const disLike = (val) => {
+const disLike = (val, index) => {
   if (val.Disliked) {
     return;
   }
@@ -57,7 +57,7 @@ const disLike = (val) => {
     Disliked: true,
   });
   reqUpdateArticles(articleRecord);
-  emit('update');
+  emit('update', index, false, true);
 };
 
 const page = ref(0);
@@ -97,10 +97,7 @@ const handlerPreview = (id) => {
           >
             <template #avatar>
               <NAvatar>
-                <NImage
-                  width="100"
-                  :src="'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'"
-                />
+                <NImage :src="item.Img_url" />
               </NAvatar>
             </template>
 
@@ -122,13 +119,13 @@ const handlerPreview = (id) => {
           <SvgIcon
             :name="`${item.Liked ? 'like' : 'likek'}`"
             :class="`${item.Liked ? 'active ' : ''}icon-wrap`"
-            @click="Like(item)"
+            @click="Like(item, index)"
           />
           {{ item.Like }}
           <SvgIcon
             :name="`${item.Disliked ? 'dislike' : 'dislikek'}`"
             :class="`${item.Disliked ? 'active ' : ''}icon-wrap`"
-            @click="disLike(item)"
+            @click="disLike(item, index)"
           />
           {{ item.Dislike }}
         </div>

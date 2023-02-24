@@ -13,7 +13,7 @@ import { reactive, ref } from 'vue';
 import { NModal } from 'naive-ui';
 import ShowArticle from '@/components/ShowArticle.vue';
 const articleList = reactive({ count: 0, articles: [], user: [] });
-
+const articleRecord = reactive([]);
 const page = (data) => {
   // console.log(data);
   getArticle(8, data);
@@ -26,12 +26,22 @@ async function getArticle(PageSize, PageNo) {
   const map = {};
   articleList.articles = [];
   articleList.count = result.count;
-  articleList.user = result.user;
+
+  // articleList.user = result.user;
   for (const value of result.records) {
     map[value.Title] = value;
   }
+  // for (const value of result.articles) {
+  //   articleList.articles.push({ ...map[value.Title], ...value });
+  // }
   for (const value of result.articles) {
-    articleList.articles.push({ ...map[value.Title], ...value });
+    articleRecord.push({ ...map[value.Title], ...value });
+  }
+  for (const value of result.user) {
+    map[value.Name] = value;
+  }
+  for (const value of articleRecord) {
+    articleList.articles.push({ ...map[value.Author], ...value });
   }
   console.log(articleList);
 }
@@ -76,10 +86,26 @@ const handlerView = (id) => {
 const handlerCancelArticleModal = () => {
   isShow.value = false;
 };
+
+const update = (index, liked, disliked) => {
+  console.log(liked);
+  console.log(articleList.articles);
+  articleList.articles[index].Liked = liked;
+  articleList.articles[index].Disliked = disliked;
+  if (liked === true) {
+    articleList.articles[index].Like++;
+    articleList.articles[index].Dislike--;
+  } else {
+    articleList.articles[index].Like--;
+    articleList.articles[index].Dislike++;
+  }
+};
 </script>
 <template>
   <div class="content">
-    <div class="left"><Article :list="articleList" @page="page" @view="handlerView" /></div>
+    <div class="left">
+      <Article :list="articleList" @page="page" @view="handlerView" @update="update" />
+    </div>
     <div class="right">
       <ArticleHot :list="articleHotList" />
       <UserHot :list="userHotList" class="user" />
