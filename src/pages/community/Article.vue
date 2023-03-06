@@ -89,45 +89,55 @@ const handlerPreview = (id) => {
     </div>
     <NList hoverable clickable>
       <NListItem v-for="(item, index) of props.list.articles" :item="item" :key="item.ID">
-        <div>
-          <NThing
-            title="相见恨晚"
-            content-style="margin-top: 10px;"
-            @click="handlerPreview(item.ID)"
-          >
-            <template #avatar>
-              <NAvatar>
-                <NImage :src="item.Img_url" />
-              </NAvatar>
-            </template>
+        <div class="listItem">
+          <div>
+            <NThing
+              title="相见恨晚"
+              content-style="margin-top: 10px;"
+              @click="handlerPreview(item.ID)"
+            >
+              <template #avatar>
+                <NAvatar round :src="item.Img_url" size="large">
+                  <!-- <NImage  /> -->
+                </NAvatar>
+              </template>
 
-            <template #header>
-              <div>{{ item.Title }}</div>
-            </template>
-            <template #description>
-              <NSpace size="small" style="margin-top: 4px">
-                <NTag :bordered="false" type="success" size="small"> 环形公路 </NTag>
-                <NTag :bordered="false" type="info" size="small"> 潜水艇司机 </NTag>
-              </NSpace>
-            </template>
-            <!-- <template #description> {{ item.CreatedAt }} </template> -->
-          </NThing>
+              <template #header>
+                <div class="title">
+                  {{ item.Title }}
+                </div>
+              </template>
+              <template #description>
+                <NSpace size="small" style="padding-left: 10px; margin-bottom: 15px">
+                  <NTag :bordered="false" type="success" size="small"> 环形公路 </NTag>
+                  <NTag :bordered="false" type="info" size="small"> 潜水艇司机 </NTag>
+                </NSpace>
+              </template>
+              {{ item.Description }}
+              <div class="time">{{ item.CreatedAt }}</div>
+              <!-- <template #description> {{ item.CreatedAt }} </template> -->
+            </NThing>
+          </div>
+          <img width="272" src="@/assets/bg.jpeg" alt="" />
         </div>
-        {{ item.CreatedAt }} <br />
-        {{ item.Description }}
-        <div>
-          <SvgIcon
-            :name="`${item.Liked ? 'like' : 'likek'}`"
-            :class="`${item.Liked ? 'active ' : ''}icon-wrap`"
-            @click="Like(item, index)"
-          />
-          {{ item.Like }}
-          <SvgIcon
-            :name="`${item.Disliked ? 'dislike' : 'dislikek'}`"
-            :class="`${item.Disliked ? 'active ' : ''}icon-wrap`"
-            @click="disLike(item, index)"
-          />
-          {{ item.Dislike }}
+        <div class="svg">
+          <div style="padding-right: 20px; display: flex">
+            <SvgIcon
+              :name="`${item.Liked ? 'like' : 'likek'}`"
+              :class="`${item.Liked ? 'active ' : ''}icon-wrap`"
+              @click="Like(item, index)"
+            />
+            <div class="num">{{ item.Like }}</div>
+          </div>
+          <div class="border">|</div>
+          <div style="padding-left: 20px; display: flex">
+            <SvgIcon
+              :name="`${item.Disliked ? 'dislike' : 'dislikek'}`"
+              :class="`${item.Disliked ? 'active ' : ''}icon-wrap`"
+              @click="disLike(item, index)"
+            />
+            <div class="num">{{ item.Dislike }}</div>
+          </div>
         </div>
         <!-- <div>
             <NAvatar>
@@ -151,6 +161,12 @@ const handlerPreview = (id) => {
   </NCard>
 </template>
 <style lang="scss" scoped>
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
 .article {
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
@@ -169,5 +185,33 @@ const handlerPreview = (id) => {
     color: rgb(97, 96, 97);
     background-color: aqu;
   }
+}
+
+.svg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 17px;
+  padding-top: 20px;
+  .num {
+    margin-top: -5px;
+  }
+  .border {
+    margin-top: -5px;
+  }
+}
+
+.time {
+  color: gray;
+  font-weight: 700;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-top: 10px;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 }
 </style>

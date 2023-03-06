@@ -76,14 +76,87 @@ const isShow = ref('article');
     </div>
     <div v-show="isShow === 'article'">
       <NList hoverable clickable>
-        <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
-          <div class="listItem">
+        <div v-show="props.list.count <= 0 ? true : false" class="wzt">
+          <div>
+            <img src="@/assets/wzt.png" alt="" />
+          </div>
+          <div>无内容</div>
+        </div>
+        <div v-show="props.list.count > 0 ? true : false">
+          <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
+            <div class="listItem">
+              <div class="articleItem">
+                <div>
+                  <NThing
+                    title="相见恨晚"
+                    content-style="margin-top: 10px;"
+                    @click="handlerPreview(item.ID)"
+                  >
+                    <!-- <template #avatar>
+              <NAvatar>
+                <NImage
+                  width="100"
+                  :src="'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'"
+                />
+              </NAvatar>
+            </template> -->
+
+                    <template #header>
+                      <div>
+                        <h3>{{ item.Title }}</h3>
+                      </div>
+                    </template>
+                    <template #description>
+                      <NSpace size="small" style="margin-top: 4px">
+                        <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
+                        <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
+                        <!-- <div class="time">{{ item.CreatedAt }}</div> -->
+                      </NSpace>
+                    </template>
+                    {{ item.Description }}
+                    <br />
+                    <div class="time">{{ item.CreatedAt }}</div>
+                  </NThing>
+                  <!-- <template #suffix> -->
+                  <!-- <img width="272" src="@/assets/bg.jpeg" alt="" /> -->
+                  <!-- <template /> -->
+                </div>
+              </div>
+              <img
+                width="272"
+                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                alt=""
+              />
+            </div>
+          </NListItem>
+        </div>
+        <div class="pagination">
+          <n-pagination
+            v-model:page="page"
+            :page-slot="3"
+            :item-count="props.list.count"
+            @click="clickPage(page)"
+            :page-size="5"
+          />
+        </div>
+      </NList>
+    </div>
+    <div v-show="isShow === 'collection'">
+      <NList hoverable clickable>
+        <div v-show="props.listCollection.count <= 0 ? true : false" class="wzt">
+          <div>
+            <img src="@/assets/wzt.png" alt="" />
+          </div>
+          <div>无内容</div>
+        </div>
+        <div v-show="props.listCollection.count > 0 ? true : false">
+          <NListItem v-for="item of props.listCollection.articles" :item="item" :key="item.ID">
             <div class="articleItem">
               <div>
                 <NThing
                   title="相见恨晚"
                   content-style="margin-top: 10px;"
-                  @click="handlerPreview(item.ID)"
+                  @click="handlerPreview2(item.ID)"
                 >
                   <!-- <template #avatar>
               <NAvatar>
@@ -103,71 +176,18 @@ const isShow = ref('article');
                     <NSpace size="small" style="margin-top: 4px">
                       <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
                       <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
-                      <!-- <div class="time">{{ item.CreatedAt }}</div> -->
                     </NSpace>
                   </template>
                   {{ item.Description }}
                   <br />
-                  <div class="time">{{ item.CreatedAt }}</div>
+                  {{ item.CreatedAt }}
                 </NThing>
-                <!-- <template #suffix> -->
-                <!-- <img width="272" src="@/assets/bg.jpeg" alt="" /> -->
-                <!-- <template /> -->
               </div>
+
+              <!-- <div class="image"><img src="@/assets/bg.jpeg" alt="" /></div> -->
             </div>
-            <img width="272" src="@/assets/bg.jpeg" alt="" />
-          </div>
-        </NListItem>
-        <div class="pagination">
-          <n-pagination
-            v-model:page="page"
-            :page-slot="3"
-            :item-count="props.list.count"
-            @click="clickPage(page)"
-            :page-size="5"
-          />
+          </NListItem>
         </div>
-      </NList>
-    </div>
-    <div v-show="isShow === 'collection'">
-      <NList hoverable clickable>
-        <NListItem v-for="item of props.listCollection.articles" :item="item" :key="item.ID">
-          <div class="articleItem">
-            <div>
-              <NThing
-                title="相见恨晚"
-                content-style="margin-top: 10px;"
-                @click="handlerPreview2(item.ID)"
-              >
-                <!-- <template #avatar>
-              <NAvatar>
-                <NImage
-                  width="100"
-                  :src="'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'"
-                />
-              </NAvatar>
-            </template> -->
-
-                <template #header>
-                  <div>
-                    <h3>{{ item.Title }}</h3>
-                  </div>
-                </template>
-                <template #description>
-                  <NSpace size="small" style="margin-top: 4px">
-                    <NTag :bordered="false" type="success" size="small"> 后端开发 </NTag>
-                    <NTag :bordered="false" type="info" size="small"> 中间件 </NTag>
-                  </NSpace>
-                </template>
-                {{ item.Description }}
-                <br />
-                {{ item.CreatedAt }}
-              </NThing>
-            </div>
-
-            <!-- <div class="image"><img src="@/assets/bg.jpeg" alt="" /></div> -->
-          </div>
-        </NListItem>
         <div class="pagination">
           <n-pagination
             v-model:page="page2"
@@ -214,11 +234,19 @@ const isShow = ref('article');
     }
   }
 }
+.wzt {
+  min-height: 578px;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .time {
   color: gray;
   font-weight: 700;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-top: 10px;
   // padding-left: 40px;
 }
 </style>

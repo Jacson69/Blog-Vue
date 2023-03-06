@@ -41,27 +41,32 @@ clickPage(page);
       <div>级别</div>
       <div>时间</div>
     </div>
-
     <NList hoverable clickable class="list">
-      <NListItem v-for="item of props.list.diaries" :key="item.ID">
-        <div class="item">
-          <div class="avatar">
-            <div>
-              <n-avatar round :size="45" :src="item.Avatar" />
-            </div>
-            <div style="padding-left: 6px">{{ item.Name }}</div>
-          </div>
-          <div>{{ item.Context }}</div>
-          <div class="level" :class="item.Status ? 'primary' : 'muted'">
-            {{ item.Status ? '紧急' : '一般' }}
-          </div>
-          <div>{{ item.Employed }}</div>
-          <!-- <div class="name left">
-            {{ item.Name }}
-          </div>
-          <div>{{ item.Fans }}</div> -->
+      <div v-show="props.list.count <= 0 ? true : false" class="wzt">
+        <div>
+          <img src="@/assets/wzt.png" alt="" />
         </div>
-      </NListItem>
+        <div>无内容</div>
+      </div>
+      <div v-show="props.list.count > 0 ? true : false">
+        <NListItem v-for="item of props.list.diaries" :key="item.ID">
+          <div class="item">
+            <div class="avatar">
+              <div>
+                <n-avatar round :size="37" :src="item.Avatar" />
+              </div>
+              <div style="padding-left: 6px">{{ item.Name }}</div>
+            </div>
+            <div>{{ item.Context }}</div>
+            <div>
+              <div class="level" :class="item.Status ? 'primary' : 'muted'">
+                {{ item.Status ? '紧急' : '一般' }}
+              </div>
+            </div>
+            <div>{{ item.Employed }}</div>
+          </div>
+        </NListItem>
+      </div>
     </NList>
     <div class="pagination">
       <n-pagination
@@ -108,23 +113,36 @@ clickPage(page);
   justify-content: space-around;
   border-bottom: 1px solid rgb(239, 239, 245);
   padding: 12px 20px;
+  & > div {
+    width: 25%;
+    text-align: center;
+  }
 }
 .item {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  & > div {
+    // flex-grow: 1;
+    // flex-basis: min-content;
+    width: 25%;
+    text-align: center;
+  }
   .avatar {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
   }
   .level {
     background-color: pink;
     border-radius: 6px;
     padding: 3px 12px;
+    width: 30px;
+    margin: 0 auto;
+    color: #fff;
   }
   .primary {
-    background-color: rgb(123, 204, 234);
+    background-color: #2080f0;
   }
 
   .muted {
@@ -140,5 +158,14 @@ clickPage(page);
   // :nth-child(3) {
   //   width: 20%;
   // }
+}
+
+.wzt {
+  min-height: 378px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

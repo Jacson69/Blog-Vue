@@ -47,7 +47,7 @@ clickPage(page);
         <div class="item">
           <div class="avatar">
             <div>
-              <n-avatar round :size="45" :src="item.Img_url" />
+              <n-avatar round :size="37" :src="item.Img_url" />
             </div>
             <div style="padding-left: 6px">{{ item.Name }}</div>
           </div>
@@ -105,15 +105,25 @@ clickPage(page);
   justify-content: space-around;
   border-bottom: 1px solid rgb(239, 239, 245);
   padding: 12px 20px;
+  & > div {
+    width: 25%;
+    text-align: center;
+  }
 }
 .item {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  & > div {
+    // flex-grow: 1;
+    // flex-basis: min-content;
+    width: 25%;
+    text-align: center;
+  }
   .avatar {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
   }
   // text-align: center;
   // :nth-child(1) {

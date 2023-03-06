@@ -29,7 +29,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
   width: 248px;
   flex-direction: column;
   flex-shrink: 0;
-  background-color: transparent;
+  // background-color: transparent;
   user-select: none;
   padding: 16px;
   padding-top: 50px;
@@ -61,7 +61,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
       box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
       .icon-wrap {
         color: #fff;
-        background-color: #3d393b;
+        background-color: #2080f0;
       }
     }
 

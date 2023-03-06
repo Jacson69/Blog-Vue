@@ -24,7 +24,7 @@ export const reqGetArticlesByUser = async (data) => {
   });
   result.articles = result.articles.map((value) => ({
     ...value,
-    CreatedAt: moment(value.CreatedAt).format('YYYY-MM-DD h:mm'),
+    CreatedAt: moment(value.CreatedAt).format('YYYY年MM月DD日 h:mm'),
   }));
   return result;
 };
@@ -40,7 +40,7 @@ export const reqGetArticlesByLike = async (data) => {
   });
   result.articles = result.articles.map((value) => ({
     ...value,
-    CreatedAt: moment(value.CreatedAt).format('YYYY-MM-DD h:mm'),
+    CreatedAt: moment(value.CreatedAt).format('YYYY年MM月DD日 h:mm'),
   }));
   return result;
 };

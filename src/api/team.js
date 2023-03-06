@@ -50,3 +50,17 @@ export const reqAddTeamDiary = (data) =>
     method: 'post',
     data,
   });
+
+export const reqAddTeamMemberByCode = (data) =>
+  request({
+    url: '/auth/addTeamMemberByCode',
+    method: 'post',
+    data,
+  });
+
+export const reqCreateTeam = (data) =>
+  request({
+    url: '/auth/createTeam',
+    method: 'post',
+    data,
+  });

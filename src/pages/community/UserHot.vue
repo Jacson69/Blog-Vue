@@ -71,7 +71,7 @@ const props = defineProps({
   align-items: center;
   // justify-content: space-between;
   .name {
-    color: red;
+    color: #2080f0;
   }
 }
 .left {

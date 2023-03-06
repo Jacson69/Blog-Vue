@@ -5,13 +5,15 @@ import {
   NCard,
   NDescriptions,
   NDescriptionsItem,
+  NDivider,
   NForm,
   NFormItem,
   NInput,
+  NModal,
   NRadio,
   NRadioGroup,
   NSpace,
-  NThing,
+  NUpload,
 } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { useUserStore } from '@/stores/user';
@@ -49,6 +51,10 @@ const handlerOk = async () => {
 };
 
 const u = reactive({ ...userStore.user });
+
+const handleUpload = (file) => {
+  const { url } = file;
+};
 </script>
 
 <template>
@@ -146,6 +152,24 @@ const u = reactive({ ...userStore.user });
                 maxWidth: '640px',
               }"
             >
+              <n-form-item label="头像：" path="inputValue" style="margin: auto 0">
+                <n-upload list-type="image-card" @click="handleUpload"> 点击上传 </n-upload>
+                <!-- <n-divider /> -->
+                <!-- <n-upload
+                  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+                  :default-file-list="previewFileList"
+                  list-type="image-card"
+                  @preview="handlePreview"
+                />
+                <n-modal
+                  v-model:show="showModal"
+                  preset="card"
+                  style="width: 600px"
+                  title="一张很酷的图片"
+                >
+                  <img :src="previewImageUrl" style="width: 100%" />
+                </n-modal> -->
+              </n-form-item>
               <n-form-item label="昵称：" path="inputValue">
                 <n-input v-model:value="u.name" />
               </n-form-item>
@@ -207,6 +231,7 @@ const u = reactive({ ...userStore.user });
   // border-bottom: 1px solid rgb(239, 239, 245);
   text-align: center;
   padding-top: 20px;
+  background-image: url('https://ww1.sinaimg.cn/mw2000/70ace9b7ly1ggzusnypoej20yi0yiaop.jpg');
 }
 
 .content {

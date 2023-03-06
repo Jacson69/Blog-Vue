@@ -18,7 +18,7 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'reload']);
 const data = reactive({ context: '', level: true });
 const level = ref('1');
 const handlerCancel = () => {
@@ -41,9 +41,10 @@ const handlerOk = async () => {
     data.level = false;
   }
   const result = await reqAddTeamDiary(data);
-  console.log(result);
+  // console.log(result);
   window.msg.success('保存成功！');
   handlerCancel();
+  emit('reload');
 };
 </script>
 <template>

@@ -14,7 +14,7 @@ export const reqGetArticlesByPage = async (data) => {
   });
   result.articles = result.articles.map((value) => ({
     ...value,
-    CreatedAt: moment(value.CreatedAt).format('YYYY年MM月DD日 h:mm:ss'),
+    CreatedAt: moment(value.CreatedAt).format('YYYY年MM月DD日 h:mm'),
   }));
   return result;
 };
