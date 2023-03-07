@@ -56,7 +56,18 @@ export const useUserStore = defineStore('user', {
       localStorage.removeItem('USER');
       localStorage.removeItem('TOKEN');
       this.token = JSON.parse('{"token":""}').token;
-      this.user = JSON.parse('null');
+      this.user = {
+        name: '',
+        telephone: '',
+        email: '',
+        img_url: '',
+        sex: '',
+        team: '',
+        introduction: '',
+        created_at: '',
+        fans: 0,
+        follows: '',
+      };
     },
   },
 });

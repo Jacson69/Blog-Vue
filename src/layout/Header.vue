@@ -15,11 +15,8 @@ const handleSelect = async (key) => {
   if (key === 'profile') {
     router.replace({ path: '/profile' });
   } else {
-    await userStore.exitUser();
-    setTimeout(() => {
-      router.replace({ path: '/login' });
-      console.log('Adasdasdasd');
-    }, 1000);
+    userStore.exitUser();
+    router.replace({ path: '/login' });
   }
 };
 </script>
