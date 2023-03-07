@@ -2,7 +2,7 @@
 import { NCard, NList, NListItem, NSpace, NSwitch, NTag, NThing } from 'naive-ui';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { ref } from 'vue';
-const value = ref(false);
+const value = ref(true);
 const handleChange = (value) => {
   window.msg.success(`Update value: ${value}`);
 };
@@ -31,7 +31,7 @@ const handleChange = (value) => {
       </div>
     </div> -->
     <div class="list">
-      <n-switch v-model:value="active" @update:value="handleChange" />
+      <n-switch v-model:value="value" @update:value="handleChange" />
       <!-- <span class="title">Email me when someone follows me</span> -->
       Email me when someone follows me
     </div>
@@ -44,11 +44,11 @@ const handleChange = (value) => {
       Email me when someone follows me
     </div>
     <div class="list">
-      <n-switch v-model:value="active" @update:value="handleChange" />
+      <n-switch v-model:value="value" @update:value="handleChange" />
       Email me when someone follows me
     </div>
     <div class="list">
-      <n-switch v-model:value="active" @update:value="handleChange" />
+      <n-switch v-model:value="value" @update:value="handleChange" />
       Email me when someone follows me
     </div>
     <div class="list">

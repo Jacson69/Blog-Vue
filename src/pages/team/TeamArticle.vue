@@ -80,7 +80,7 @@ const handlerPreview = (id) => {
                 <!-- <template #description> {{ item.CreatedAt }} </template> -->
               </NThing>
             </div>
-            <img width="272" src="@/assets/bg.jpeg" alt="" />
+            <img width="272" src="@/assets/maple.jpg" alt="" />
           </div>
           <!-- <div>
             <NAvatar>

@@ -52,5 +52,11 @@ export const useUserStore = defineStore('user', {
         this.user = data;
       }
     },
+    exitUser() {
+      localStorage.removeItem('USER');
+      localStorage.removeItem('TOKEN');
+      this.token = JSON.parse('{"token":""}').token;
+      this.user = JSON.parse('null');
+    },
   },
 });

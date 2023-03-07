@@ -13,7 +13,7 @@ import { reactive, ref } from 'vue';
 import { NModal } from 'naive-ui';
 import ShowArticle from '@/components/ShowArticle.vue';
 const articleList = reactive({ count: 0, articles: [], user: [] });
-const articleRecord = reactive([]);
+
 const page = (data) => {
   // console.log(data);
   getArticle(8, data);
@@ -26,7 +26,7 @@ async function getArticle(PageSize, PageNo) {
   const map = {};
   articleList.articles = [];
   articleList.count = result.count;
-
+  const articleRecord = reactive([]);
   // articleList.user = result.user;
   for (const value of result.records) {
     map[value.Title] = value;

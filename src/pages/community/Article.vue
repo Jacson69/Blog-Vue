@@ -118,7 +118,7 @@ const handlerPreview = (id) => {
               <!-- <template #description> {{ item.CreatedAt }} </template> -->
             </NThing>
           </div>
-          <img width="272" src="@/assets/bg.jpeg" alt="" />
+          <img width="272" src="@/assets/sunshine.jpg" alt="" />
         </div>
         <div class="svg">
           <div style="padding-right: 20px; display: flex">

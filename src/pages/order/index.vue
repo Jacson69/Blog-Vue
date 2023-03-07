@@ -80,7 +80,8 @@ import { NCard } from 'naive-ui';
   .money {
     width: 50%;
     margin-right: 20px;
-
+    box-shadow: 0px 5px 8px rgb(0 0 0 / 15%);
+    border-radius: 8px;
     flex-grow: 1;
     .header {
       padding-bottom: 20px;

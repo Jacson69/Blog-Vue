@@ -1,7 +1,27 @@
 <script setup>
 import SvgIcon from '@/components/SvgIcon.vue';
-import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
-// import { MdCash } from '@vicons/ionicons4';
+import { NAvatar, NBreadcrumb, NBreadcrumbItem, NButton, NDropdown } from 'naive-ui';
+import { useUserStore } from '@/stores/user';
+import { useRouter } from 'vue-router';
+const userStore = useUserStore();
+const router = useRouter();
+// const u = reactive({ ...userStore.user });
+const options = [
+  { label: '个人资料', key: 'profile' },
+  { label: '退出登录', key: 'exit' },
+];
+const handleSelect = async (key) => {
+  console.log(key);
+  if (key === 'profile') {
+    router.replace({ path: '/profile' });
+  } else {
+    await userStore.exitUser();
+    setTimeout(() => {
+      router.replace({ path: '/login' });
+      console.log('Adasdasdasd');
+    }, 1000);
+  }
+};
 </script>
 <template>
   <div class="header">
@@ -10,8 +30,8 @@ import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
       <div class="bottom">Dashboard</div> -->
       <div class="top">
         <n-breadcrumb separator=">">
-          <n-breadcrumb-item> Pages</n-breadcrumb-item>
-          <n-breadcrumb-item> 天津分行</n-breadcrumb-item>
+          <n-breadcrumb-item> 博客社区</n-breadcrumb-item>
+          <n-breadcrumb-item> {{ this.$route.meta.label }}</n-breadcrumb-item>
         </n-breadcrumb>
       </div>
 
@@ -19,10 +39,17 @@ import { NBreadcrumb, NBreadcrumbItem, NIcon } from 'naive-ui';
     </div>
     <div class="right">
       <!-- <div class="icon-wrap"> -->
-      <div class="user">
-        <SvgIcon :name="'account'" />
-        小陈
-      </div>
+      <!-- <div class="user"> -->
+      <!-- <SvgIcon :name="'account'" /> -->
+
+      <n-dropdown :options="options" trigger="click" @select="handleSelect">
+        <!-- <n-button>用户资料</n-button> -->
+        <div class="user">
+          <NAvatar round :src="`${userStore.user.img_url}`" size="large" />
+          {{ userStore.user.name }}
+        </div>
+      </n-dropdown>
+      <!-- </div> -->
       <div class="menu">
         <SvgIcon :name="'ic_fluent_apps_list_24_filled'" />
       </div>

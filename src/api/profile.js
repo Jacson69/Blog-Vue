@@ -44,3 +44,10 @@ export const reqGetArticlesByLike = async (data) => {
   }));
   return result;
 };
+
+export const reqUpload = (data) =>
+  request({
+    url: '/auth/uploadFile',
+    method: 'post',
+    data,
+  });

@@ -45,7 +45,7 @@ const props = defineProps({
           <div class="name left">
             {{ item.Title }}
           </div>
-          <div>{{ item.Click }}</div>
+          <div style="color: #8c8c8c">{{ item.Click }}</div>
         </div>
       </NListItem>
     </NList>
@@ -68,7 +68,8 @@ const props = defineProps({
   align-items: center;
   // justify-content: space-between;
   .name {
-    color: #2080f0;
+    color: #8c8c8c;
+    // color: #2080f0;
   }
 }
 .left {

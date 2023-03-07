@@ -18,7 +18,7 @@ import {
 import SvgIcon from '@/components/SvgIcon.vue';
 import { useUserStore } from '@/stores/user';
 import { reactive, ref } from 'vue';
-import { reqEditUserInfo } from '@/api/profile';
+import { reqEditUserInfo, reqUpload } from '@/api/profile';
 const props = defineProps({
   userInfo: {
     type: Object,
@@ -42,6 +42,23 @@ const handlerCancel = () => {
 };
 
 const handlerOk = async () => {
+  const savePicture = {
+    picture_name: '',
+    picture_data: '',
+  };
+
+  // 如果上传了新的电影海报
+  if (imageData.url.length != 0) {
+    savePicture.picture_name = `${Date.now()}`;
+    const words = imageData.name.split('.');
+    savePicture.picture_name += `.${words[words.length - 1]}`;
+    // 取出base64编码后的数据部分
+    const datas = imageData.url.split(',');
+    savePicture.picture_data = datas[datas.length - 1];
+    const pictureResp = await reqUpload(savePicture);
+    console.log(pictureResp.url);
+    u.img_url = pictureResp.url;
+  }
   // console.log(userStore.user.name);
   await reqEditUserInfo(u);
   window.msg.success('保存成功！');
@@ -51,9 +68,31 @@ const handlerOk = async () => {
 };
 
 const u = reactive({ ...userStore.user });
+// 用户自己上传的头像文件
+const imageData = reactive({
+  name: '',
+  url: '',
+});
+const handleUpload = () => {
+  const input = document.createElement('input');
 
-const handleUpload = (file) => {
-  const { url } = file;
+  input.type = 'file';
+  input.accept = 'image/png, image/jpeg, image/gif, image/jpg';
+  input.onchange = (event) => {
+    const files = event.target.files;
+    if (files) {
+      console.log(files); // imageData.url = URL.createObjectURL(files[0]);
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = () => {
+        imageData.url = reader.result;
+        imageData.name = files[0].name;
+        console.log(imageData.url);
+      };
+    }
+  };
+  input.click();
 };
 </script>
 
@@ -68,11 +107,11 @@ const handleUpload = (file) => {
         paddingTop: 0,
         paddingBottom: '16px',
       }"
-      class="hot"
+      class="top hot"
     >
       <div class="title">
-        <n-avatar round :size="60" :src="props.userInfo.img_url" />
-        <h3 class="font-semibold m-0">{{ props.userInfo.name }}</h3>
+        <n-avatar round :size="90" :src="props.userInfo.img_url" :bordered="true" />
+        <h2 class="font-semibold m-0">{{ props.userInfo.name }}</h2>
         <p>CEO / Co-Founder</p>
       </div>
       <!-- <NList hoverable clickable>
@@ -152,8 +191,14 @@ const handleUpload = (file) => {
                 maxWidth: '640px',
               }"
             >
-              <n-form-item label="头像：" path="inputValue" style="margin: auto 0">
-                <n-upload list-type="image-card" @click="handleUpload"> 点击上传 </n-upload>
+              <n-form-item label="头像：" path="inputValue">
+                <div class="avatar">
+                  <div><img :src="imageData.url || u.img_url" width="80" height="80" /></div>
+                  <div>
+                    <NButton type="info" @click="handleUpload" class="btn">点击上传</NButton>
+                  </div>
+                </div>
+                <!-- <n-upload list-type="image-card" @click="handleUpload" max="1" action="http://127.0.0.1:8081/api/auth/uploadFile"> 点击上传 </n-upload> -->
                 <!-- <n-divider /> -->
                 <!-- <n-upload
                   action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
@@ -229,9 +274,11 @@ const handleUpload = (file) => {
   // align-items: center;
   // justify-content: space-between;
   // border-bottom: 1px solid rgb(239, 239, 245);
+  position: relative;
+
   text-align: center;
   padding-top: 20px;
-  background-image: url('https://ww1.sinaimg.cn/mw2000/70ace9b7ly1ggzusnypoej20yi0yiaop.jpg');
+  top: 20px;
 }
 
 .content {
@@ -259,5 +306,14 @@ const handleUpload = (file) => {
 }
 .btn {
   border-radius: 7px;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+}
+.top {
+  background-image: url('@/assets/bg.png');
+  background-size: 490px 240px;
 }
 </style>

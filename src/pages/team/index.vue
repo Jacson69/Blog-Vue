@@ -43,7 +43,7 @@ async function getMembers(PageSize, PageNo) {
 }
 
 const articleList = reactive({ count: 0, articles: [] });
-const articleRecord = reactive([]);
+
 const pageArticle = (data) => {
   // console.log(data);
   // getArticle(8, data);
@@ -51,9 +51,9 @@ const pageArticle = (data) => {
 };
 async function getArticles(obj) {
   const result = await reqGetArticlesByTeam(obj);
-  articleList.articles = result.articles;
+  articleList.articles = [];
   articleList.count = result.count;
-
+  const articleRecord = reactive([]);
   const map = {};
   for (const value of result.records) {
     map[value.Title] = value;
