@@ -24,8 +24,6 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   // ...
   const token = useUserStore().token;
-  const user = useUserStore().user;
-  console.log(user);
   // console.log(token);
   // console.log(to);
   // console.log(from);

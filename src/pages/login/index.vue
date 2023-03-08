@@ -64,6 +64,8 @@ const handlerenter = (key) => {
 
 <template>
   <div class="login-wrap">
+    <div class="bg" />
+    <div class="text">Hello World!</div>
     <div class="form-structor">
       <div class="signup" :class="{ 'slide-up': flag }">
         <h2 class="form-title" id="signup" @click="handleClick"><span>or</span>Sign up</h2>
@@ -118,7 +120,7 @@ const handlerenter = (key) => {
 // @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
 .login-wrap {
-  // 	position: relative;
+  position: relative;
   // 	min-height: 100vh;
   // 	background-color: #E1E8EE;
   // 	display: flex;
@@ -132,8 +134,25 @@ const handlerenter = (key) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: 100%;
-  background-image: url('@/assets/bg.jpeg');
+  // background-size: 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url('@/assets/fss.jpg');
+  .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    opacity: 0.5;
+  }
+  .text {
+    position: absolute;
+    color: white;
+    translate: -700% -50%;
+    top: 50%;
+    font-size: 111px;
+    // left: 50px;
+  }
 }
 
 .form-structor {
@@ -143,7 +162,7 @@ const handlerenter = (key) => {
   width: 450px;
   position: relative;
   overflow: hidden;
-  margin-left: 400px;
+  margin-left: 750px;
   &::after {
     content: '';
     opacity: 0.8;
