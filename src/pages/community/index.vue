@@ -93,8 +93,14 @@ const update = (index, liked, disliked) => {
   articleList.articles[index].Liked = liked;
   articleList.articles[index].Disliked = disliked;
   if (liked === true) {
-    articleList.articles[index].Like++;
-    articleList.articles[index].Dislike--;
+    if (articleList.articles[index].Dislike === 0) {
+      articleList.articles[index].Like++;
+    } else {
+      articleList.articles[index].Like++;
+      articleList.articles[index].Dislike--;
+    }
+  } else if (articleList.articles[index].Like === 0) {
+    articleList.articles[index].Dislike++;
   } else {
     articleList.articles[index].Like--;
     articleList.articles[index].Dislike++;

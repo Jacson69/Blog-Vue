@@ -65,51 +65,63 @@ const handlerenter = (key) => {
 <template>
   <div class="login-wrap">
     <div class="bg" />
-    <div class="text">Hello World!</div>
-    <div class="form-structor">
-      <div class="signup" :class="{ 'slide-up': flag }">
-        <h2 class="form-title" id="signup" @click="handleClick"><span>or</span>Sign up</h2>
-        <div
-          class="form-holder"
-          @keyup.enter="
-            () => {
-              handlerenter(0);
-            }
-          "
-        >
-          <input type="text" class="input" placeholder="昵称" v-model="registerData.name" />
-          <input type="email" class="input" placeholder="邮箱" v-model="registerData.email" />
-          <input type="email" class="input" placeholder="手机号" v-model="registerData.telephone" />
-          <input type="password" class="input" placeholder="密码" v-model="registerData.password" />
-          <input type="password" class="input" placeholder="再次输入密码" v-model="password2" />
-        </div>
-        <button class="submit-btn" @click="handleRegiter">Sign up</button>
-      </div>
-      <div class="login" :class="{ 'slide-up': !flag }">
-        <div class="center">
-          <h2 class="form-title" id="login" @click="handleClick"><span>or</span>Log in</h2>
+    <div class="flex">
+      <div class="text">你的人生，刚开始！</div>
+      <div class="form-structor">
+        <div class="signup" :class="{ 'slide-up': flag }">
+          <h2 class="form-title" id="signup" @click="handleClick"><span>or</span>Sign up</h2>
           <div
             class="form-holder"
-            @keyup.enter="
-              () => {
-                handlerenter(1);
-              }
-            "
-          >
-            <input type="email" class="input" placeholder="Email" v-model="data.email" />
-            <input type="password" class="input" placeholder="Password" v-model="data.password" />
-          </div>
-          <button
-            class="submit-btn"
-            @click="handleLogin"
             @keyup.enter="
               () => {
                 handlerenter(0);
               }
             "
           >
-            Log in
-          </button>
+            <input type="text" class="input" placeholder="昵称" v-model="registerData.name" />
+            <input type="email" class="input" placeholder="邮箱" v-model="registerData.email" />
+            <input
+              type="email"
+              class="input"
+              placeholder="手机号"
+              v-model="registerData.telephone"
+            />
+            <input
+              type="password"
+              class="input"
+              placeholder="密码"
+              v-model="registerData.password"
+            />
+            <input type="password" class="input" placeholder="再次输入密码" v-model="password2" />
+          </div>
+          <button class="submit-btn" @click="handleRegiter">Sign up</button>
+        </div>
+        <div class="login" :class="{ 'slide-up': !flag }">
+          <div class="center">
+            <h2 class="form-title" id="login" @click="handleClick"><span>or</span>Log in</h2>
+            <div
+              class="form-holder"
+              @keyup.enter="
+                () => {
+                  handlerenter(1);
+                }
+              "
+            >
+              <input type="email" class="input" placeholder="Email" v-model="data.email" />
+              <input type="password" class="input" placeholder="Password" v-model="data.password" />
+            </div>
+            <button
+              class="submit-btn"
+              @click="handleLogin"
+              @keyup.enter="
+                () => {
+                  handlerenter(0);
+                }
+              "
+            >
+              Log in
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -120,6 +132,7 @@ const handlerenter = (key) => {
 // @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
 .login-wrap {
+  user-select: none;
   position: relative;
   // 	min-height: 100vh;
   // 	background-color: #E1E8EE;
@@ -137,21 +150,31 @@ const handlerenter = (key) => {
   // background-size: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-image: url('@/assets/fss.jpg');
+  background-image: url('@/assets/cp.jpg');
   .bg {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: gray;
+    background-color: rgb(86, 83, 83);
     opacity: 0.5;
   }
-  .text {
+  .flex {
     position: absolute;
-    color: white;
-    translate: -700% -50%;
-    top: 50%;
-    font-size: 111px;
-    // left: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    .text {
+      color: #eee;
+      // padding-right: 400px;
+      // translate: -200% -50%;
+      // top: 50%;
+      // left: 200px;
+      padding-left: 5%;
+
+      font-size: 85px;
+    }
   }
 }
 
@@ -162,7 +185,7 @@ const handlerenter = (key) => {
   width: 450px;
   position: relative;
   overflow: hidden;
-  margin-left: 750px;
+  margin-right: 8%;
   &::after {
     content: '';
     opacity: 0.8;

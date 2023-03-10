@@ -155,7 +155,7 @@ const handleUpload = () => {
               }}
             </p>
 
-            <n-descriptions label-placement="left" title="描述" :column="1">
+            <n-descriptions label-placement="left" title="描述" :column="1" class="info">
               <n-descriptions-item label="名称"> {{ props.userInfo.name }} </n-descriptions-item>
               <n-descriptions-item label="性别">
                 <NAvatar
@@ -293,10 +293,13 @@ const handleUpload = () => {
     padding-bottom: 10px;
   }
   .info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: red;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    // background-color: red;
+    // color: #973737;
+    // font-weight: 600;
+    // font-size: 15px;
   }
 }
 .footer {

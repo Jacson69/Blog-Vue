@@ -118,7 +118,7 @@ const handlerPreview = (id) => {
               <!-- <template #description> {{ item.CreatedAt }} </template> -->
             </NThing>
           </div>
-          <img width="272" src="@/assets/sunshine.jpg" alt="" />
+          <img width="272" src="@/assets/wz.jpg" alt="" />
         </div>
         <div class="svg">
           <div style="padding-right: 20px; display: flex">
@@ -154,7 +154,7 @@ const handlerPreview = (id) => {
           :page-slot="3"
           :item-count="props.list.count"
           @click="clickPage(page)"
-          :page-size="5"
+          :page-size="8"
         />
       </div>
     </NList>
