@@ -9,7 +9,7 @@ const props = defineProps({
     required: true,
   },
 });
-const page = ref(0);
+const page = ref(1);
 const emit = defineEmits(['addMemory', 'page']);
 const clickPage = (page) => {
   console.log(page);
@@ -142,7 +142,8 @@ clickPage(page);
     color: #fff;
   }
   .primary {
-    background-color: #2080f0;
+    // background-color: #2080f0;
+    background-color: #fc5531;
   }
 
   .muted {

@@ -30,53 +30,53 @@ export const reqGetArticlesInfo = () =>
     method: 'get',
   });
 
-export const reqRegister = (data) =>
-  requests({
-    url: '/auth/register',
-    method: 'post',
-    data,
-  });
+// export const reqRegister = (data) =>
+//   requests({
+//     url: '/auth/register',
+//     method: 'post',
+//     data,
+//   });
 
-export const reqAddTeamDiary = (data) =>
-  requests({
-    url: '/auth/addTeamDiary',
-    method: 'post',
-    data,
-  });
+// export const reqAddTeamDiary = (data) =>
+//   requests({
+//     url: '/auth/addTeamDiary',
+//     method: 'post',
+//     data,
+//   });
 
-export const reqAddTeamMemberByCode = (data) =>
-  requests({
-    url: '/auth/addTeamMemberByCode',
-    method: 'post',
-    data,
-  });
+// export const reqAddTeamMemberByCode = (data) =>
+//   requests({
+//     url: '/auth/addTeamMemberByCode',
+//     method: 'post',
+//     data,
+//   });
 
-export const reqGetDiariesByTeamName = (data) =>
-  requests({
-    url: '/auth/getDiariesByTeamName',
-    method: 'post',
-    data,
-  });
-export const reqGetResources = (data) =>
-  requests({
-    url: '/auth/getResources',
-    method: 'post',
-    data,
-  });
+// export const reqGetDiariesByTeamName = (data) =>
+//   requests({
+//     url: '/auth/getDiariesByTeamName',
+//     method: 'post',
+//     data,
+//   });
+// export const reqGetResources = (data) =>
+//   requests({
+//     url: '/auth/getResources',
+//     method: 'post',
+//     data,
+//   });
 
-export const reqGetMembersByTeamName = (data) =>
-  requests({
-    url: '/auth/getMembersByTeamName',
-    method: 'post',
-    data,
-  });
+// export const reqGetMembersByTeamName = (data) =>
+//   requests({
+//     url: '/auth/getMembersByTeamName',
+//     method: 'post',
+//     data,
+//   });
 
-export const reqCreateTeam = (data) =>
-  requests({
-    url: '/auth/createTeam',
-    method: 'post',
-    data,
-  });
+// export const reqCreateTeam = (data) =>
+//   requests({
+//     url: '/auth/createTeam',
+//     method: 'post',
+//     data,
+//   });
 
 // export const reqEditUserInfo = (data) =>
 //   requests({

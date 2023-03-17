@@ -47,7 +47,7 @@ const handlerPreview = (id) => {
       <div class="header">
         <h2>团队文章</h2>
       </div>
-      <NList hoverable clickable>
+      <NList hoverable clickable class="list">
         <NListItem v-for="item of props.list.articles" :item="item" :key="item.ID">
           <div class="listItem">
             <div>
@@ -80,7 +80,7 @@ const handlerPreview = (id) => {
                 <!-- <template #description> {{ item.CreatedAt }} </template> -->
               </NThing>
             </div>
-            <img width="272" src="@/assets/wz.jpg" alt="" />
+            <!-- <img width="272" src="@/assets/wz.jpg" alt="" /> -->
           </div>
           <!-- <div>
             <NAvatar>
@@ -91,16 +91,16 @@ const handlerPreview = (id) => {
             </NAvatar>
           </div> -->
         </NListItem>
-        <div class="pagination">
-          <n-pagination
-            v-model:page="page"
-            :page-slot="3"
-            :item-count="props.list.count"
-            @click="clickPage(page)"
-            :page-size="5"
-          />
-        </div>
       </NList>
+      <div class="pagination">
+        <n-pagination
+          v-model:page="page"
+          :page-slot="3"
+          :item-count="props.list.count"
+          @click="clickPage(page)"
+          :page-size="5"
+        />
+      </div>
     </NCard>
   </div>
 </template>
@@ -108,6 +108,9 @@ const handlerPreview = (id) => {
 .article {
   border-radius: 8px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 15%);
+  .list {
+    min-height: 780px;
+  }
 }
 .pagination {
   display: flex;

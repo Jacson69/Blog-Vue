@@ -24,11 +24,147 @@
 // });
 import charData from './charData.vue';
 import chartMoney from './chartMoney.vue';
-import { NCard } from 'naive-ui';
+import { NCard, NNumberAnimation, NStatistic } from 'naive-ui';
 </script>
 
 <template>
   <!-- <RouterView /> -->
+  <div>
+    <div class="ydl">
+      <NCard
+        :segmented="{
+          content: true,
+          footer: 'soft',
+        }"
+        :content-style="{
+          paddingTop: 0,
+          paddingBottom: '16px',
+        }"
+        style="box-shadow: 0px 5px 8px rgb(0 0 0 / 15%); border-radius: 8px"
+      >
+        <div class="title">
+          <div>
+            <div class="header">
+              <h2>阅读量</h2>
+            </div>
+            <div style="text-align: center">
+              <n-statistic label="" tabular-nums>
+                <n-number-animation
+                  ref="numberAnimationInstRef"
+                  :from="0"
+                  :to="699"
+                  :duration="1500"
+                />
+                <!-- <template #suffix> 条群消息 </template> -->
+              </n-statistic>
+            </div>
+          </div>
+          <div>
+            <div class="header">
+              <h2>累计收益</h2>
+            </div>
+            <div style="text-align: center">
+              <n-statistic label="" tabular-nums>
+                <n-number-animation
+                  ref="numberAnimationInstRef"
+                  :from="0"
+                  :to="699"
+                  :duration="1500"
+                />
+                <!-- <template #suffix> 条群消息 </template> -->
+              </n-statistic>
+            </div>
+          </div>
+          <div>
+            <div class="header">
+              <h2>粉丝数</h2>
+            </div>
+            <div style="text-align: center">
+              <n-statistic label="" tabular-nums>
+                <n-number-animation
+                  ref="numberAnimationInstRef"
+                  :from="0"
+                  :to="699"
+                  :duration="1500"
+                />
+                <!-- <template #suffix> 条群消息 </template> -->
+              </n-statistic>
+            </div>
+          </div>
+          <div>
+            <div class="header">
+              <h2>收藏数</h2>
+            </div>
+            <div style="text-align: center">
+              <n-statistic label="" tabular-nums>
+                <n-number-animation
+                  ref="numberAnimationInstRef"
+                  :from="0"
+                  :to="699"
+                  :duration="1500"
+                />
+                <!-- <template #suffix> 条群消息 </template> -->
+              </n-statistic>
+            </div>
+          </div>
+        </div>
+      </NCard>
+    </div>
+    <!-- <div class="ljsy">
+      <NCard
+        :segmented="{
+          content: true,
+          footer: 'soft',
+        }"
+        :content-style="{
+          paddingTop: 0,
+          paddingBottom: '16px',
+        }"
+        style="box-shadow: 0px 5px 8px rgb(0 0 0 / 15%); border-radius: 8px"
+      >
+        <div class="header">
+          <h2>累计收益</h2>
+        </div>
+        6999
+      </NCard>
+    </div>
+    <div class="fss">
+      <NCard
+        :segmented="{
+          content: true,
+          footer: 'soft',
+        }"
+        :content-style="{
+          paddingTop: 0,
+          paddingBottom: '16px',
+        }"
+        style="box-shadow: 0px 5px 8px rgb(0 0 0 / 15%); border-radius: 8px"
+      >
+        <div class="header">
+          <h2>粉丝数</h2>
+        </div>
+        6999
+      </NCard>
+    </div>
+    <div class="scs">
+      <NCard
+        :segmented="{
+          content: true,
+          footer: 'soft',
+        }"
+        :content-style="{
+          paddingTop: 0,
+          paddingBottom: '16px',
+        }"
+        style="box-shadow: 0px 5px 8px rgb(0 0 0 / 15%); border-radius: 8px"
+      >
+        <div class="header">
+          <h2>收藏数</h2>
+        </div>
+        6999
+      </NCard>
+    </div> -->
+  </div>
   <div class="card">
     <div class="money">
       <NCard
@@ -97,5 +233,10 @@ import { NCard } from 'naive-ui';
       padding-bottom: 20px;
     }
   }
+}
+.title {
+  display: flex;
+
+  justify-content: space-around;
 }
 </style>

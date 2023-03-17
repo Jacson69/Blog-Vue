@@ -64,3 +64,9 @@ export const reqCreateTeam = (data) =>
     method: 'post',
     data,
   });
+export const reqGetResources = (data) =>
+  request({
+    url: '/auth/getResources',
+    method: 'post',
+    data,
+  });

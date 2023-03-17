@@ -61,7 +61,8 @@ import SvgIcon from '@/components/SvgIcon.vue';
       box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
       .icon-wrap {
         color: #fff;
-        background-color: #2080f0;
+        background-color: #fc5531;
+        // background-color: #2080f0;
       }
     }
 

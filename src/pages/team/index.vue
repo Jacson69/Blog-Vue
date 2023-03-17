@@ -11,9 +11,22 @@ import {
   reqGetArticlesByTeam,
   reqGetDiariesByTeamName,
   reqGetMembersByTeamName,
+  reqGetResources,
 } from '@/api/team';
 import { reactive, ref } from 'vue';
 import { NButton, NCard, NForm, NFormItem, NInput, NModal } from 'naive-ui';
+
+const resourceList = reactive({ count: 0, resources: [] });
+const pageResource = (data) => {
+  getResources(10, data);
+};
+
+const getResources = async (PageSize, PageNo) => {
+  const result = await reqGetResources({ PageSize, PageNo });
+  resourceList.resources = result.resources;
+  resourceList.count = result.count;
+};
+
 const diariesList = reactive({ count: 0, diaries: [] });
 const page = (data) => {
   // console.log(data);
@@ -156,11 +169,13 @@ const reload = () => {
       <div class="right"><Team :list="menberList" @pageMember="pageMember" /></div>
     </div>
 
-    <div>
+    <div class="content">
       <div class="left">
         <TeamArticle :list="articleList" @page="pageArticle" @view="handlerView" />
       </div>
-      <div class="bottom"><Resource /></div>
+      <div class="bottom">
+        <Resource :list="resourceList" @pageResource="pageResource" />
+      </div>
     </div>
     <AddModal :wModal="showModal" @close="handlerCancel" @reload="reload" />
     <n-modal
@@ -294,7 +309,15 @@ const reload = () => {
   width: 40%;
   flex-shrink: 0;
 }
+.bottom {
+  width: 46%;
+  flex-shrink: 0;
+}
 
+.left {
+  flex-grow: 1;
+  padding-right: 20px;
+}
 .box {
   // box-sizing: border-box;
   height: 100%;
