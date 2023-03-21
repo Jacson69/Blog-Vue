@@ -31,29 +31,29 @@ const handleChange = (value) => {
       </div>
     </div> -->
     <div class="list">
-      <n-switch v-model:value="value" @update:value="handleChange" />
+      <n-switch v-model:value="value" @update:value="handleChange" style="padding-right: 20px" />
       <!-- <span class="title">Email me when someone follows me</span> -->
-      Email me when someone follows me
+      是否启用MarkDown编辑器
     </div>
     <div class="list">
-      <n-switch v-model:value="active" @update:value="handleChange" />
-      Email me when someone follows me
+      <n-switch v-model:value="active" @update:value="handleChange" style="padding-right: 20px" />
+      是否启用富文本编辑器
     </div>
     <div class="list">
-      <n-switch v-model:value="active" @update:value="handleChange" />
-      Email me when someone follows me
+      <n-switch v-model:value="active" @update:value="handleChange" style="padding-right: 20px" />
+      是否启用夜间浏览模式
     </div>
     <div class="list">
-      <n-switch v-model:value="value" @update:value="handleChange" />
-      Email me when someone follows me
+      <n-switch v-model:value="value" @update:value="handleChange" style="padding-right: 20px" />
+      是否启用消息订阅提醒功能
     </div>
     <div class="list">
-      <n-switch v-model:value="value" @update:value="handleChange" />
-      Email me when someone follows me
+      <n-switch v-model:value="value" @update:value="handleChange" style="padding-right: 20px" />
+      是否启用主题变更功能
     </div>
     <div class="list">
-      <n-switch v-model:value="active" @update:value="handleChange" />
-      Email me when someone follows me
+      <n-switch v-model:value="active" @update:value="handleChange" style="padding-right: 20px" />
+      是否启用关注提醒通知
     </div>
   </NCard>
 </template>

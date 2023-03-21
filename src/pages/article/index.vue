@@ -57,7 +57,7 @@ const handlerOk = async (obj) => {
 
 <template>
   <div>
-    <p>Tip：每5分钟会自动保存噢</p>
+    <!-- <p>Tip：每5分钟会自动保存噢</p> -->
 
     <v-md-editor
       v-model="data.context"

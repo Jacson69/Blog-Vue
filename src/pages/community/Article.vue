@@ -85,7 +85,7 @@ const handlerPreview = (id) => {
     }"
   >
     <div class="header">
-      <h2>文章</h2>
+      <h2>社区文章</h2>
     </div>
     <NList hoverable clickable>
       <NListItem v-for="(item, index) of props.list.articles" :item="item" :key="item.ID">

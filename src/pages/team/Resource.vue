@@ -19,57 +19,59 @@ clickPage(page);
 </script>
 
 <template>
-  <NCard
-    :segmented="{
-      content: true,
-      footer: 'soft',
-    }"
-    :content-style="{
-      paddingTop: 0,
-      paddingBottom: '16px',
-    }"
-    class="hot"
-  >
-    <div class="header">
-      <h2>团队资源</h2>
-    </div>
+  <div v-show="props.list.count > 0 ? true : false">
+    <NCard
+      :segmented="{
+        content: true,
+        footer: 'soft',
+      }"
+      :content-style="{
+        paddingTop: 0,
+        paddingBottom: '16px',
+      }"
+      class="hot"
+    >
+      <div class="header">
+        <h2>团队资源</h2>
+      </div>
 
-    <div class="title">
-      <div>名称</div>
-      <div>用户</div>
-      <div>类型</div>
-      <div>下载量</div>
-    </div>
+      <div class="title">
+        <div>名称</div>
+        <div>用户</div>
+        <div>类型</div>
+        <div>下载量</div>
+      </div>
 
-    <NList hoverable clickable class="list">
-      <NListItem v-for="item of props.list.resources" :key="item.ID">
-        <div class="item">
-          <div class="avatar">
-            <div>
-              <n-avatar :size="37" :src="item.Url" />
+      <NList hoverable clickable class="list">
+        <NListItem v-for="item of props.list.resources" :key="item.ID">
+          <div class="item">
+            <div class="avatar">
+              <div>
+                <n-avatar :size="37" :src="item.Url" />
+              </div>
+              <div style="padding-left: 6px">{{ item.Title }}</div>
             </div>
-            <div style="padding-left: 6px">{{ item.Title }}</div>
-          </div>
-          <div>{{ item.Author }}</div>
-          <div>{{ item.Type }}</div>
-          <div>{{ item.Download }}</div>
-          <!-- <div class="name left">
+            <div>{{ item.Author }}</div>
+            <div>{{ item.Type }}</div>
+            <div>{{ item.Download }}</div>
+            <!-- <div class="name left">
             {{ item.Name }}
           </div>
           <div>{{ item.Fans }}</div> -->
-        </div>
-      </NListItem>
-    </NList>
-    <div class="pagination">
-      <n-pagination
-        v-model:page="page"
-        :page-slot="3"
-        :item-count="props.list.count"
-        @click="clickPage(page)"
-        :page-size="10"
-      />
-    </div>
-  </NCard>
+          </div>
+        </NListItem>
+      </NList>
+      <div class="pagination">
+        <n-pagination
+          v-model:page="page"
+          :page-slot="3"
+          :item-count="props.list.count"
+          @click="clickPage(page)"
+          :page-size="10"
+        />
+      </div>
+    </NCard>
+  </div>
 </template>
 <style lang="scss" scoped>
 .hot {

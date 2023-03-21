@@ -66,7 +66,7 @@ const isShow = ref('article');
     :bordered="false"
   >
     <div class="header">
-      <div><h2>文章</h2></div>
+      <div><h2>个人文章</h2></div>
       <div>
         <n-radio-group name="radiobuttongroup1" v-model:value="isShow">
           <n-radio-button value="article" label="文章" @click="clickPage(0)" />
@@ -124,7 +124,7 @@ const isShow = ref('article');
               </div>
               <img
                 width="272"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                src="https://img2.baidu.com/it/u=4093751728,801191648&fm=253&fmt=auto&app=138&f=JPEG?w=700&h=394"
                 alt=""
               />
             </div>

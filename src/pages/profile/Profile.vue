@@ -317,6 +317,6 @@ const handleUpload = () => {
 }
 .top {
   background-image: url('@/assets/bg.png');
-  background-size: 490px 240px;
+  background-size: 100% 100%;
 }
 </style>

@@ -29,7 +29,7 @@ const props = defineProps({
       <div>
         <p>
           <SvgIcon name="date" />
-          <span>2022-04-09</span>
+          <span>2022-03-20</span>
         </p>
       </div>
     </div>
@@ -68,8 +68,8 @@ const props = defineProps({
   align-items: center;
   // justify-content: space-between;
   .name {
-    color: #8c8c8c;
-    // color: #2080f0;
+    // color: #8c8c8c;
+    color: #2080f0;
   }
 }
 .left {

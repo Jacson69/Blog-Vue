@@ -29,7 +29,7 @@ const props = defineProps({
       <div>
         <p>
           <SvgIcon name="date" />
-          <span>2022-04-09</span>
+          <span>2022-03-20</span>
         </p>
       </div>
     </div>

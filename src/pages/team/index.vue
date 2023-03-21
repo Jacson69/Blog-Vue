@@ -15,7 +15,8 @@ import {
 } from '@/api/team';
 import { reactive, ref } from 'vue';
 import { NButton, NCard, NForm, NFormItem, NInput, NModal } from 'naive-ui';
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const resourceList = reactive({ count: 0, resources: [] });
 const pageResource = (data) => {
   getResources(10, data);
@@ -118,10 +119,12 @@ const modalJoin = ref(false);
 const modalCreate = ref(false);
 const handlerCancelModalJoin = () => {
   modalJoin.value = false;
+  location.reload();
 };
 
 const handlerCancelModalCreate = () => {
   modalCreate.value = false;
+  location.reload();
 };
 
 const code = ref('');
