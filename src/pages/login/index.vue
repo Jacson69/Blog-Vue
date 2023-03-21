@@ -29,6 +29,19 @@ const handleLogin = async () => {
   //       return
   // }
   // 登录失败情况
+
+  if (data.email === '' || data.password === '') {
+    window.msg.error('输入内容不能为空，请重新输入！');
+    return;
+  }
+
+  const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+
+  if (!mailReg.test(data.email)) {
+    window.msg.error('输入邮箱格式有误，请重新输入');
+    return;
+  }
+
   const token = await userStore.login(data);
   if (token) {
     router.replace({ path: '/' });
@@ -46,7 +59,39 @@ const handleRegiter = async () => {
   // 	alert("输入的两次密码不一致")
   // 	return
   // }
+
   // 账号同名错误
+  if (
+    registerData.email === '' ||
+    registerData.name === '' ||
+    registerData.password === '' ||
+    registerData.telephone === '' ||
+    password2.value === ''
+  ) {
+    window.msg.error('输入内容不能为空，请重新输入！');
+    return;
+  }
+  const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+  if (!mailReg.test(registerData.email)) {
+    window.msg.error('邮箱输入格式不正确，请重新输入！');
+    return;
+  }
+  const phoneReg = /^1[34578]\d{9}$$/;
+  if (!Number.isInteger(+registerData.telephone)) {
+    window.msg.error('手机号码填写有误，请输入数字值！');
+    return;
+  } else if (!phoneReg.test(registerData.telephone)) {
+    window.msg.error('电话号码格式不正确，请重新输入！');
+    return;
+  }
+  if (registerData.password.length < 8) {
+    window.msg.error('密码不足8位，请重新输入！');
+    return;
+  }
+  if (registerData.password !== password2.value) {
+    window.msg.error('两次密码不一致，请重新输入！');
+    return;
+  }
   const token = await userStore.register(registerData);
   if (token) {
     router.replace({ path: '/' });
