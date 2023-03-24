@@ -45,7 +45,7 @@ import { NCard, NNumberAnimation, NStatistic } from 'naive-ui';
         <div class="title">
           <div>
             <div class="header">
-              <h2>阅读量</h2>
+              <h2>浏览量</h2>
             </div>
             <div style="text-align: center">
               <n-statistic label="" tabular-nums>

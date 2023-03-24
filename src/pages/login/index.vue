@@ -20,7 +20,7 @@ const handleClick = () => {
 const password2 = ref('');
 const registerData = reactive({ name: '', email: '', telephone: '', password: '' });
 const data = reactive({ email: '', password: '' });
-const message = useMessage();
+
 const handleLogin = async () => {
   // console.log(data)
   // reqLogin(data)

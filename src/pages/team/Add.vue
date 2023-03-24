@@ -52,7 +52,7 @@ const handlerOk = async () => {
   <n-modal
     :show="props.wModal"
     preset="card"
-    title="添加备忘录"
+    title="添加留言"
     style="width: 500px"
     @mask-click="handlerCancel"
     @close="handlerCancel"
