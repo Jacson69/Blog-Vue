@@ -37,7 +37,7 @@ clickPage(page);
 
     <div class="title">
       <div>名称</div>
-      <div>内容</div>
+      <div style="width: 40%">内容</div>
       <div>级别</div>
       <div>时间</div>
     </div>
