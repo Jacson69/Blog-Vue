@@ -112,7 +112,7 @@ const handleUpload = () => {
       <div class="title">
         <n-avatar round :size="90" :src="props.userInfo.img_url" :bordered="true" />
         <h2 class="font-semibold m-0">{{ props.userInfo.name }}</h2>
-        <p>CEO / Co-Founder</p>
+        <p>CEO / Blog-vue</p>
       </div>
       <!-- <NList hoverable clickable>
       <NListItem v-for="item of props.list" :key="item.ID">

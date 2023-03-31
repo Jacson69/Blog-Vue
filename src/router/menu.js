@@ -5,7 +5,7 @@ export default [
     component: () => import('@/pages/order/index.vue'),
     // redirect: '/order/list',
     meta: {
-      label: '首页',
+      label: '资源数据',
       icon: 'sy',
     },
     // children: [
@@ -40,7 +40,7 @@ export default [
     path: 'community',
     name: 'COMMUNITY',
     meta: {
-      label: '社区动态',
+      label: '社区资源',
       icon: 'sq',
     },
     component: () => import('@/pages/community/index.vue'),
@@ -49,7 +49,7 @@ export default [
     path: 'article',
     name: 'ARTICLE',
     meta: {
-      label: '文章',
+      label: '创作中心',
       icon: 'wz',
     },
     component: () => import('@/pages/article/index.vue'),
@@ -67,7 +67,7 @@ export default [
     path: 'setting',
     name: 'SETTING',
     meta: {
-      label: '设置中心',
+      label: '系统设置',
       icon: 'sz',
     },
     component: () => import('@/pages/setting/index.vue'),

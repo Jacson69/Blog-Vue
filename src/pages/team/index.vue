@@ -300,16 +300,16 @@ const reload = () => {
 <style lang="scss" scoped>
 .content {
   display: flex;
-  margin: 16px 0;
+  margin: 16px 0 30px 0;
   min-width: 900px;
   // overflow: auto;
 }
 .top {
   flex-grow: 1;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 .right {
-  width: 40%;
+  width: 30%;
   flex-shrink: 0;
 }
 .bottom {
@@ -319,7 +319,7 @@ const reload = () => {
 
 .left {
   flex-grow: 1;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 .box {
   // box-sizing: border-box;

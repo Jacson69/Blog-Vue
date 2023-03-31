@@ -109,8 +109,8 @@ const handlerPreview = (id) => {
               </template>
               <template #description>
                 <NSpace size="small" style="padding-left: 10px; margin-bottom: 15px">
-                  <NTag :bordered="false" type="success" size="small"> 环形公路 </NTag>
-                  <NTag :bordered="false" type="info" size="small"> 潜水艇司机 </NTag>
+                  <NTag :bordered="false" type="success" size="small"> 分布式 </NTag>
+                  <NTag :bordered="false" type="info" size="small"> 社区动态文章 </NTag>
                 </NSpace>
               </template>
               {{ item.Description }}

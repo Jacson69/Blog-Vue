@@ -57,7 +57,7 @@ clickPage(page);
               </div>
               <div style="padding-left: 6px">{{ item.Name }}</div>
             </div>
-            <div>{{ item.Context }}</div>
+            <div style="width: 40%">{{ item.Context }}</div>
             <div>
               <div class="level" :class="item.Status ? 'primary' : 'muted'">
                 {{ item.Status ? '紧急' : '一般' }}
