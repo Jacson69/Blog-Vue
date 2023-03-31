@@ -147,7 +147,7 @@ clickPage(page);
   }
 
   .muted {
-    background-color: #d2cece;
+    background-color: #9d9999;
   }
   // text-align: center;
   // :nth-child(1) {
