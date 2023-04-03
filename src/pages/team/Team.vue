@@ -10,7 +10,7 @@ const props = defineProps({
 });
 
 const page = ref(0);
-const emit = defineEmits(['pageMember']);
+const emit = defineEmits(['pageMember', 'addChat']);
 const clickPage = (page) => {
   console.log('-------------------------------');
   console.log(page);
@@ -43,7 +43,7 @@ clickPage(page);
     </div>
 
     <NList hoverable clickable class="list">
-      <NListItem v-for="item of props.list.members" :key="item.ID">
+      <NListItem v-for="item of props.list.members" :key="item.Id">
         <div class="item">
           <div class="avatar">
             <div>
@@ -53,7 +53,7 @@ clickPage(page);
           </div>
           <div>{{ item.Position }}</div>
           <div>{{ item.UpdatedAt }}</div>
-          <div>发送</div>
+          <div @click="() => emit('addChat', item.Id)">发送</div>
           <!-- <div class="name left">
             {{ item.Name }}
           </div>

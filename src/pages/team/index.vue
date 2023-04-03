@@ -1,5 +1,6 @@
 <script setup>
 import Memories from './Memories.vue';
+import Chat from './chat.vue';
 import Team from './Team.vue';
 import TeamArticle from './TeamArticle.vue';
 import Resource from './Resource.vue';
@@ -11,11 +12,24 @@ import {
   reqGetArticlesByTeam,
   reqGetDiariesByTeamName,
   reqGetMembersByTeamName,
+  reqGetMessage,
   reqGetResources,
+  reqconfirmMessage,
 } from '@/api/team';
 import { reactive, ref } from 'vue';
-import { NButton, NCard, NForm, NFormItem, NInput, NModal } from 'naive-ui';
+import {
+  NAvatar,
+  NButton,
+  NCard,
+  NForm,
+  NFormItem,
+  NInput,
+  NList,
+  NListItem,
+  NModal,
+} from 'naive-ui';
 import { useRouter } from 'vue-router';
+import { async } from '@kangc/v-md-editor';
 const router = useRouter();
 const resourceList = reactive({ count: 0, resources: [] });
 const pageResource = (data) => {
@@ -98,6 +112,42 @@ const handlerCancel = () => {
   showModal.value = false;
 };
 
+const chatModal = ref(false);
+const uId = ref(0);
+function addChat(ID) {
+  chatModal.value = true;
+  // console.log(chatModal.value);
+  uId.value = ID;
+  // console.log(uId.value);
+}
+
+const handlerCancelChat = () => {
+  chatModal.value = false;
+};
+const isMessage = ref(false);
+const messageList = reactive({ count: 0, message: [] });
+getMessage();
+async function getMessage() {
+  const result = await reqGetMessage();
+  if (result.count > 0) {
+    isMessage.value = true;
+  } else {
+    isMessage.value = false;
+  }
+  messageList.count = result.count;
+  messageList.message = result.message;
+}
+
+const Cancelmessage = () => {
+  isMessage.value = false;
+};
+
+const handleConfirm = async () => {
+  isMessage.value = false;
+  await reqconfirmMessage();
+  window.msg.success('确认成功！');
+};
+
 const isShow = ref(false);
 const article = ref({});
 const handlerView = (id) => {
@@ -169,7 +219,9 @@ const reload = () => {
       <div class="top">
         <Memories :list="diariesList" @addMemory="add" @page="page" />
       </div>
-      <div class="right"><Team :list="menberList" @pageMember="pageMember" /></div>
+      <div class="right">
+        <Team :list="menberList" @pageMember="pageMember" @addChat="addChat" />
+      </div>
     </div>
 
     <div class="content">
@@ -181,6 +233,7 @@ const reload = () => {
       </div>
     </div>
     <AddModal :wModal="showModal" @close="handlerCancel" @reload="reload" />
+    <Chat :wModal="chatModal" @close="handlerCancelChat" :UserId="uId" />
     <n-modal
       :show="isShow"
       preset="card"
@@ -191,7 +244,36 @@ const reload = () => {
     >
       <ShowArticle :article="article" />
     </n-modal>
+    <!-- <div v-show="isMessage"> -->
+    <n-modal :show="isMessage" preset="card" title="未读信息" style="width: 500px">
+      <NCard :bordered="false">
+        <div class="title">
+          <div>发送者</div>
+          <div>内容</div>
+          <div>发送时间</div>
+        </div>
+        <NList hoverable clickable class="list">
+          <NListItem v-for="item of messageList.message" :key="item.ID">
+            <div class="item">
+              <div class="avatar">
+                <div>
+                  <n-avatar round :size="37" :src="item.Sender_img" />
+                </div>
+                <div style="padding-left: 6px">{{ item.Sender }}</div>
+              </div>
+              <div>{{ item.Context }}</div>
+              <div>{{ item.CreatedAt }}</div>
+            </div>
+          </NListItem>
+        </NList>
+        <div class="footer">
+          <NButton type="info" @click="handleConfirm">确认</NButton>
+          <NButton type="error" @click="Cancelmessage">取消</NButton>
+        </div>
+      </NCard>
+    </n-modal>
   </div>
+  <!-- </div> -->
   <div v-show="!isTeam">
     <NCard
       :segmented="{
@@ -346,6 +428,33 @@ const reload = () => {
   border-radius: 20px;
   .btn1 {
     border-radius: 7px;
+  }
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid rgb(239, 239, 245);
+  padding: 0 20px 12px 20px;
+  & > div {
+    width: 25%;
+    text-align: center;
+  }
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  // & > div {
+  //   // flex-grow: 1;
+  //   // flex-basis: min-content;
+  //   width: 25%;
+  //   text-align: center;
+  // }
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

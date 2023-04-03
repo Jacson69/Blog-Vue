@@ -69,7 +69,8 @@ const props = defineProps({
   // justify-content: space-between;
   .name {
     // color: #8c8c8c;
-    color: #2080f0;
+    // color: #2080f0;
+    color: #fc5531;
   }
 }
 .left {

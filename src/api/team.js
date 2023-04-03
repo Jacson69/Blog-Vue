@@ -70,3 +70,27 @@ export const reqGetResources = (data) =>
     method: 'post',
     data,
   });
+
+export const reqSendMessage = (data) =>
+  request({
+    url: '/auth/sendMessage',
+    method: 'post',
+    data,
+  });
+export const reqGetMessage = async () => {
+  const result = await request({
+    url: 'auth/getMessage',
+    method: 'get',
+  });
+  result.message = result.message.map((value) => ({
+    ...value,
+    CreatedAt: moment(value.CreatedAt).format('YYYY-MM-DD'),
+  }));
+  return result;
+};
+
+export const reqconfirmMessage = () =>
+  request({
+    url: 'auth/confirmMessage',
+    method: 'post',
+  });
