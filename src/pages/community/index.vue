@@ -99,11 +99,14 @@ const update = (index, liked, disliked) => {
       articleList.articles[index].Like++;
       articleList.articles[index].Dislike--;
     }
+    window.msg.success('点赞成功！');
   } else if (articleList.articles[index].Like === 0) {
     articleList.articles[index].Dislike++;
+    window.msg.success('点踩成功！');
   } else {
     articleList.articles[index].Like--;
     articleList.articles[index].Dislike++;
+    window.msg.success('点踩成功！');
   }
 };
 </script>

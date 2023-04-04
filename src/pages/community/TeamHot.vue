@@ -45,7 +45,7 @@ const props = defineProps({
           <div class="name left">
             {{ item.Name }}
           </div>
-          <div>{{ item.Count }}</div>
+          <div>{{ item.Num }}</div>
         </div>
       </NListItem>
     </NList>

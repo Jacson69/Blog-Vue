@@ -18,7 +18,7 @@ const handleClick = () => {
 // const email = ref("")
 // const pwd = ref("")
 const password2 = ref('');
-const registerData = reactive({ name: '', email: '', telephone: '', password: '' });
+const registerData = reactive({ name: '', email: '', phone: '', password: '' });
 const data = reactive({ email: '', password: '' });
 
 const handleLogin = async () => {
@@ -65,7 +65,7 @@ const handleRegiter = async () => {
     registerData.email === '' ||
     registerData.name === '' ||
     registerData.password === '' ||
-    registerData.telephone === '' ||
+    registerData.phone === '' ||
     password2.value === ''
   ) {
     window.msg.error('输入内容不能为空，请重新输入！');
@@ -77,10 +77,10 @@ const handleRegiter = async () => {
     return;
   }
   const phoneReg = /^1[34578]\d{9}$$/;
-  if (!Number.isInteger(+registerData.telephone)) {
+  if (!Number.isInteger(+registerData.phone)) {
     window.msg.error('手机号码填写有误，请输入数字值！');
     return;
-  } else if (!phoneReg.test(registerData.telephone)) {
+  } else if (!phoneReg.test(registerData.phone)) {
     window.msg.error('电话号码格式不正确，请重新输入！');
     return;
   }
@@ -125,12 +125,7 @@ const handlerenter = (key) => {
           >
             <input type="text" class="input" placeholder="昵称" v-model="registerData.name" />
             <input type="email" class="input" placeholder="邮箱" v-model="registerData.email" />
-            <input
-              type="email"
-              class="input"
-              placeholder="手机号"
-              v-model="registerData.telephone"
-            />
+            <input type="email" class="input" placeholder="手机号" v-model="registerData.phone" />
             <input
               type="password"
               class="input"

@@ -97,7 +97,7 @@ const handlerPreview = (id) => {
               @click="handlerPreview(item.ID)"
             >
               <template #avatar>
-                <NAvatar round :src="item.Img_url" size="large">
+                <NAvatar round :src="item.Img" size="large">
                   <!-- <NImage  /> -->
                 </NAvatar>
               </template>

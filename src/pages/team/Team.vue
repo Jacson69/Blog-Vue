@@ -47,7 +47,7 @@ clickPage(page);
         <div class="item">
           <div class="avatar">
             <div>
-              <n-avatar round :size="37" :src="item.Img_url" />
+              <n-avatar round :size="37" :src="item.Img" />
             </div>
             <div style="padding-left: 6px">{{ item.Name }}</div>
           </div>

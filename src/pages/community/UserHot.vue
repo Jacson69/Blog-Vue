@@ -44,7 +44,7 @@ const props = defineProps({
         <div class="item">
           <div class="avatar left name">
             <div>
-              <n-avatar round :size="25" :src="item.Img_url" />
+              <n-avatar round :size="25" :src="item.Img" />
             </div>
             <div style="padding-left: 6px">{{ item.Name }}</div>
           </div>

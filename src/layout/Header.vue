@@ -42,7 +42,7 @@ const handleSelect = async (key) => {
       <n-dropdown :options="options" trigger="click" @select="handleSelect">
         <!-- <n-button>用户资料</n-button> -->
         <div class="user">
-          <NAvatar round :src="`${userStore.user.img_url}`" size="large" />
+          <NAvatar round :src="`${userStore.user.img}`" size="large" />
           {{ userStore.user.name }}
         </div>
       </n-dropdown>

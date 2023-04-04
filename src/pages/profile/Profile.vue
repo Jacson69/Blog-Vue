@@ -110,7 +110,7 @@ const handleUpload = () => {
       class="top hot"
     >
       <div class="title">
-        <n-avatar round :size="90" :src="props.userInfo.img_url" :bordered="true" />
+        <n-avatar round :size="90" :src="props.userInfo.img" :bordered="true" />
         <h2 class="font-semibold m-0">{{ props.userInfo.name }}</h2>
         <p>CEO / Blog-vue</p>
       </div>
@@ -169,7 +169,7 @@ const handleUpload = () => {
                 />
               </n-descriptions-item>
               <n-descriptions-item label="电话">
-                {{ props.userInfo.telephone ? props.userInfo.telephone : '00000000000' }}
+                {{ props.userInfo.phone ? props.userInfo.phone : '00000000000' }}
               </n-descriptions-item>
               <n-descriptions-item label="邮箱">
                 {{ props.userInfo.email ? props.userInfo.email : 'xxx@fomail.com' }}
@@ -193,7 +193,7 @@ const handleUpload = () => {
             >
               <n-form-item label="头像：" path="inputValue">
                 <div class="avatar">
-                  <div><img :src="imageData.url || u.img_url" width="80" height="80" /></div>
+                  <div><img :src="imageData.url || u.img" width="80" height="80" /></div>
                   <div>
                     <NButton type="info" @click="handleUpload" class="btn">点击上传</NButton>
                   </div>
@@ -228,7 +228,7 @@ const handleUpload = () => {
                 </n-radio-group>
               </n-form-item>
               <n-form-item label="电话：">
-                <span>{{ u.telephone }}</span>
+                <span>{{ u.phone }}</span>
               </n-form-item>
               <n-form-item label="邮箱：">
                 <span>{{ u.email }}</span>
