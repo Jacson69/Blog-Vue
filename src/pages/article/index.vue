@@ -54,19 +54,17 @@ const handlerOk = async (obj) => {
   window.msg.success('保存成功！');
 };
 </script>
-
+<!-- <p>Tip：每5分钟会自动保存噢</p> -->
 <template>
   <div>
-    <!-- <p>Tip：每5分钟会自动保存噢</p> -->
-
     <v-md-editor
       v-model="data.context"
       :disabled-menus="[]"
       @upload-image="handleUploadImage"
       @save="save"
       height="600px"
+      placeholder="请输入文章的内容。。。"
     />
-    <!-- <n-button @click="showModal = true"> 来吧 </n-button> -->
     <WirteModal :wModal="showModal" @close="handlerCancel" @ok="handlerOk" />
   </div>
 </template>
