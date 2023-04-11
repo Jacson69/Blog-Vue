@@ -312,7 +312,7 @@ const reload = () => {
               >
                 <n-form label-placement="left" label-width="auto">
                   <n-form-item label="团队ID：">
-                    <n-input placeholder="请输入六位数的团队ID" v-model:value="code" />
+                    <n-input placeholder="请输入团队ID" v-model:value="code" />
                   </n-form-item>
                   <div class="footer">
                     <NButton type="info" @click="handlerOkJoin(code)" class="btn1">确定</NButton>
