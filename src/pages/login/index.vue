@@ -111,7 +111,7 @@ const handlerenter = (key) => {
   <div class="login-wrap">
     <div class="bg" />
     <div class="flex">
-      <div class="text">你的人生，刚开始！</div>
+      <div class="text">新的旅途，刚开始！</div>
       <div class="form-structor">
         <div class="signup" :class="{ 'slide-up': flag }">
           <h2 class="form-title" id="signup" @click="handleClick"><span>or</span>Sign up</h2>
