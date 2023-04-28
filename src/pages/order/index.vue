@@ -52,7 +52,7 @@ import { NCard, NNumberAnimation, NStatistic } from 'naive-ui';
                 <n-number-animation
                   ref="numberAnimationInstRef"
                   :from="0"
-                  :to="699"
+                  :to="6428"
                   :duration="1500"
                 />
                 <!-- <template #suffix> 条群消息 </template> -->
@@ -68,7 +68,7 @@ import { NCard, NNumberAnimation, NStatistic } from 'naive-ui';
                 <n-number-animation
                   ref="numberAnimationInstRef"
                   :from="0"
-                  :to="699"
+                  :to="654"
                   :duration="1500"
                 />
                 <!-- <template #suffix> 条群消息 </template> -->
@@ -84,7 +84,7 @@ import { NCard, NNumberAnimation, NStatistic } from 'naive-ui';
                 <n-number-animation
                   ref="numberAnimationInstRef"
                   :from="0"
-                  :to="699"
+                  :to="49701"
                   :duration="1500"
                 />
                 <!-- <template #suffix> 条群消息 </template> -->
@@ -100,7 +100,7 @@ import { NCard, NNumberAnimation, NStatistic } from 'naive-ui';
                 <n-number-animation
                   ref="numberAnimationInstRef"
                   :from="0"
-                  :to="699"
+                  :to="6995"
                   :duration="1500"
                 />
                 <!-- <template #suffix> 条群消息 </template> -->

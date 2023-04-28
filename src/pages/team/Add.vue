@@ -19,12 +19,12 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(['close', 'reload']);
-const data = reactive({ context: '', level: true });
-const level = ref('1');
+const data = reactive({ context: '', status: true });
+const status = ref('1');
 const handlerCancel = () => {
   data.context = '';
-  level.value = '1';
-  data.level = true;
+  status.value = '1';
+  data.status = true;
   emit('close');
 };
 
@@ -35,10 +35,10 @@ const handlerOk = async () => {
     return;
   }
   // data.level = level == "1" ? true : false,
-  if (level.value === '1') {
-    data.level = true;
+  if (status.value === '1') {
+    data.status = true;
   } else {
-    data.level = false;
+    data.status = false;
   }
   const result = await reqAddTeamDiary(data);
   // console.log(result);
@@ -72,7 +72,7 @@ const handlerOk = async () => {
             />
           </n-form-item>
           <n-form-item label="级别：">
-            <n-radio-group v-model:value="level">
+            <n-radio-group v-model:value="status">
               <n-space>
                 <n-radio value="1" checked> 紧急 </n-radio>
                 <n-radio value="0 "> 一般</n-radio>
